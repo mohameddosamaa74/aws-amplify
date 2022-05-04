@@ -1,0 +1,53 @@
+.notifications  {
+    background-color: rgba(22,27,33,255);
+    overflow: hidden;
+    height: 100%;
+}
+.notifications  h2{
+    color: #f8fafc;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 27px;
+    position: absolute;
+}
+
+.notifications   .main-side{
+    width: 100% ;
+    height:auto;
+}
+
+.notifications   .main-side .navbar .logo i{
+    font-size: 45px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.notifications   .main-side .vi{
+    display: flex;
+    background-color: rgba(22,27,33,255)
+    ;
+}
+.notifications   .main-side .vi .vid-stream {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 15px 0px 0px 0px;
+    margin-top: 15px;
+    background-color: #181f27;
+    margin-left: 37px;
+    height: 100vh;
+}
+@media only screen and (max-width: 800px) {
+    .notifications  {
+        height: 100% !important;
+    }
+    .notifications   .main-side .vi .vid-stream {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: 15px;
+        background-color: #1f232c;
+        margin: 61px 15px 15px 15px !important;  
+        height: 100%;
+      }
+}

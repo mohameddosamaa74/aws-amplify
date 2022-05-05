@@ -16,7 +16,7 @@ export const firebaseConfig = {
   storageBucket: "connect-be9f5.appspot.com",
   messagingSenderId: "792973719285",
   appId: "1:792973719285:web:9b0cad929a4efa6d4a77bc",
-  measurementId:"G-E7Y71NG8FX"
+  measurementId:"G-JLG4BXWN2W"
 };
 
 // Initialize Firebase

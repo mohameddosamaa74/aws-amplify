@@ -11,7 +11,7 @@ import {getAuth} from 'firebase/auth'
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
   apiKey: "AIzaSyBkc0zHZGyxap89jSoRcNywaWo8MssxVZY",
-  authDomain: "connect-be9f5.firebaseapp.com",
+  authDomain: "Connect-asl.site",
   projectId: "connect-be9f5",
   storageBucket: "connect-be9f5.appspot.com",
   messagingSenderId: "792973719285",

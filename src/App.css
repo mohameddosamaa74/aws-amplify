@@ -7,12 +7,6 @@
   font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
     font-size: small;
-    src: url('Poppins.eot'); /* IE9 Compat Modes */
-    src: url('Poppins.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('Poppins.woff2') format('woff2'), /* Super Modern Browsers */
-         url('Poppins.woff') format('woff'), /* Pretty Modern Browsers */
-         url('Poppins.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('Poppins.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 .sign-in-button{
   opacity: 0;

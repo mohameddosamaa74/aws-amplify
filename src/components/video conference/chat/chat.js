@@ -1,19 +1,16 @@
 import react from 'react';
 import './chat.css';
 import React, { useEffect, useState, useRef } from 'react';
-import io from 'socket.io-client';
+import socket from '../socket';
 import { Redirect } from 'react-router';
 const Chat = ({ roomId }) => {
-  const socket = useRef();
   const [msg, setMsg] = useState([]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
 
   useEffect(() => {
-    socket.current = io('https://backend-socket-tabarani.herokuapp.com/');
-    // socket.current = io('https://backend-socket-tabarani.herokuapp.com/');
-    
-    socket.current.on('FE-receive-message', ({ msg, sender, img }) => {
+    socket.on('FE-receive-message', ({ msg, sender, img }) => {
+      console.log({ msg, sender, img });
       setMsg((msgs) => [...msgs, { sender, msg, img }]);
     });
   }, []);
@@ -41,7 +38,10 @@ const Chat = ({ roomId }) => {
     const msg = text.value;
     // localStorage.setItem("text",text.value);
     if (msg) {
-      socket.current.emit('BE-send-message', {
+      console.log(msg);
+      console.log({ socket: socket });
+      console.log({ roomId, msg, sender: currentUser, img: imageuser });
+      socket.emit('BE-send-message', {
         roomId,
         msg,
         sender: currentUser,

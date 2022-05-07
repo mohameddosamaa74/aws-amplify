@@ -3,7 +3,7 @@ import react from 'react';
 import signpic from '../../../img/si.jpeg';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import Peer from 'simple-peer';
-import io from 'socket.io-client';
+import socket from '../socket';
 import './room.css';
 import Navbar from '../navbar/navbar';
 import Chat from '../chat/chat';
@@ -97,7 +97,6 @@ const close = () => {
 
 const RoomVideo = (props) => {
   console.log('roooom');
-  const socket = useRef();
   const [peers, setPeers] = useState([]);
   const [toSign, settoSign] = useState(false);
   const [userVideoAudio, setUserVideoAudio] = useState({
@@ -144,9 +143,6 @@ const RoomVideo = (props) => {
       return <Redirect to='/' />;
     }
 
-    socket.current = io('https://backend-socket-tabarani.herokuapp.com/');
-    // socket.current = io('https://backend-socket-tabarani.herokuapp.com/');
-
     // setloading(true);
     // Connect Camera & Mic
 
@@ -158,18 +154,18 @@ const RoomVideo = (props) => {
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
         console.log(props);
-        socket.current.emit('BE-join-room', {
+        socket.emit('BE-join-room', {
           roomId,
           user,
           video: true,
           audio: true,
         });
 
-        socket.current.on('FE-user-join', ({ userId, info }) => {
+        socket.on('FE-user-join', ({ userId, info }) => {
           // all users
           let { user: newUser, video, audio } = info;
 
-          const peer = createPeer(userId, socket.current.id, stream);
+          const peer = createPeer(userId, socket.id, stream);
           peer.userName = newUser.name;
           peer.peerID = userId;
 
@@ -190,7 +186,7 @@ const RoomVideo = (props) => {
             return [...users, peer];
           });
         });
-        socket.current.on('FE-receive-call', ({ signal, from, info }) => {
+        socket.on('FE-receive-call', ({ signal, from, info }) => {
           let { user: newUser, video, audio } = info;
           const peerIdx = findPeer(from);
 
@@ -219,12 +215,12 @@ const RoomVideo = (props) => {
           }
         });
 
-        socket.current.on('FE-call-accepted', ({ signal, answerId }) => {
+        socket.on('FE-call-accepted', ({ signal, answerId }) => {
           const peerIdx = findPeer(answerId);
           peerIdx.peer.signal(signal);
         });
 
-        socket.current.on('FE-user-leave', ({ userId }) => {
+        socket.on('FE-user-leave', ({ userId }) => {
           const peerIdx = findPeer(userId);
           if (peerIdx) {
             peerIdx.peer.destroy();
@@ -238,7 +234,7 @@ const RoomVideo = (props) => {
         });
       });
 
-    socket.current.on('FE-toggle-camera', ({ userId, switchTarget }) => {
+    socket.on('FE-toggle-camera', ({ userId, switchTarget }) => {
       const peerIdx = findPeer(userId);
       setUserVideoAudio((preList) => {
         let video = preList[peerIdx.userName].video;
@@ -261,7 +257,7 @@ const RoomVideo = (props) => {
     });
 
     return () => {
-      socket.current.disconnect();
+      socket.disconnect();
     };
     // eslint-disable-next-line
   }, []);
@@ -289,7 +285,7 @@ const RoomVideo = (props) => {
       console.log(newContent);
       console.log({ isFinished });
       if (isFinished) {
-        socket.current.emit('send-text', {
+        socket.emit('send-text', {
           data: newContent,
           roomId,
           name: user.name,
@@ -303,7 +299,7 @@ const RoomVideo = (props) => {
   }, [listening]);
   useEffect(() => {
     if (toSign) {
-      socket.current.on('receive-text', ({ data, name }) => {
+      socket.on('receive-text', ({ data, name }) => {
         console.log({ data });
         if (text.current) {
           text.current.textContent = data;
@@ -313,11 +309,11 @@ const RoomVideo = (props) => {
           console.log(senderName.current.textContent);
         }
       });
-      socket.current.on('send', () => {
+      socket.on('send', () => {
         console.log('finished sending 2');
         setisfinished(true);
         if (newContent.length > 0) {
-          socket.current.emit('send-text', {
+          socket.emit('send-text', {
             data: newContent,
             roomId,
             name: user.name,
@@ -327,7 +323,7 @@ const RoomVideo = (props) => {
         }
       });
       // recive data from the server
-      socket.current.on('receive-frame', ({ buffer }) => {
+      socket.on('receive-frame', ({ buffer }) => {
         console.log('received frame from backend');
         document.getElementById('stream_asl_v').src =
           'data:image/jpeg;base64,' + arrayBufferToBase64(buffer);
@@ -352,7 +348,7 @@ const RoomVideo = (props) => {
     });
 
     peer.on('signal', (signal) => {
-      socket.current.emit('BE-call-user', {
+      socket.emit('BE-call-user', {
         userToCall: userId,
         from: caller,
         signal,
@@ -373,7 +369,7 @@ const RoomVideo = (props) => {
     });
 
     peer.on('signal', (signal) => {
-      socket.current.emit('BE-accept-call', { signal, to: callerId });
+      socket.emit('BE-accept-call', { signal, to: callerId });
     });
 
     peer.on('disconnect', () => {
@@ -415,7 +411,7 @@ const RoomVideo = (props) => {
   // BackButton
   const goToBack = (e) => {
     e.preventDefault();
-    socket.current.emit('BE-leave-room', { roomId });
+    socket.emit('BE-leave-room', { roomId });
     window.location.href = '/home';
   };
   const toggleCameraAudio = (e) => {
@@ -445,7 +441,7 @@ const RoomVideo = (props) => {
       };
     });
 
-    socket.current.emit('BE-toggle-camera-audio', {
+    socket.emit('BE-toggle-camera-audio', {
       roomId,
       switchTarget: target,
     });
@@ -658,7 +654,7 @@ const RoomVideo = (props) => {
               screenRecod={screenRecod}
             />
           </div>
-          <Chat roomId={roomId} />
+          <Chat roomId={roomId}/>
         </div>
       </div>
     </react.Fragment>

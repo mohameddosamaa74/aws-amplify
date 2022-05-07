@@ -95,8 +95,7 @@ const close = () => {
   pop.classList.add('hideop');
 };
 
-const RoomVideo = (props) => {
-  console.log('roooom');
+const Roomvideo = (props) => {
   const [peers, setPeers] = useState([]);
   const [toSign, settoSign] = useState(false);
   const [userVideoAudio, setUserVideoAudio] = useState({
@@ -145,12 +144,15 @@ const RoomVideo = (props) => {
 
     // setloading(true);
     // Connect Camera & Mic
-
+    if (!navigator.mediaDevices) {
+      alert("Sorry, getUserMedia is not supported");
+      return;
+    }
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
         // setloading(false);
-
+      
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
         console.log(props);
@@ -661,4 +663,4 @@ const RoomVideo = (props) => {
   );
 };
 
-export default RoomVideo;
+export default Roomvideo;

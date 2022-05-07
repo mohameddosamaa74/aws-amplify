@@ -94,8 +94,7 @@ const close = () => {
   pop.classList.remove('showop');
   pop.classList.add('hideop');
 };
-const RoomAudio = (props) => {
-  console.log('roooom');
+const Roomaudio = (props) => {
   const [peers, setPeers] = useState([]);
   const [toSign, settoSign] = useState(false);
   const [userVideoAudio, setUserVideoAudio] = useState({
@@ -142,7 +141,10 @@ const RoomAudio = (props) => {
     }
     // setloading(true);
     // Connect Camera & Mic
-
+    if (!navigator.mediaDevices) {
+      alert("Sorry, getUserMedia is not supported");
+      return;
+    }
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
@@ -260,7 +262,7 @@ const RoomAudio = (props) => {
   }, []);
 
   useEffect(() => {
-    if (audio) {
+    if (audio && toSign) {
       console.log('start listening');
       SpeechRecognition.startListening({
         language: 'en-US',
@@ -272,7 +274,7 @@ const RoomAudio = (props) => {
       SpeechRecognition.stopListening();
     }
     // eslint-disable-next-line
-  }, [listening, audio]);
+  }, [listening, audio,toSign]);
   useEffect(() => {
     setnewcontent(transcript);
     // eslint-disable-next-line
@@ -581,4 +583,4 @@ const RoomAudio = (props) => {
   );
 };
 
-export default RoomAudio;
+export default Roomaudio;

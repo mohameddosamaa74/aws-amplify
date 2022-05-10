@@ -1,14 +1,16 @@
 
 .video-conference .chat-side{
-    width:30%;
+    
     background-color:#1f282d;
     color: #fff;
     border: 1px solid rgba(45,52,58,255);
     position: relative;
     transition:all 0.7s ease;
     height:100vh !important;
-    left: 0% !important;
+   
     overflow: hidden;
+    /* left: 30% !important; */
+    width: 0%;
     
 }
 
@@ -16,8 +18,9 @@
     display: none;
 }
 .video-conference .chat-side.open{
-    left:30%;
-   width: 0px;
+    /* left: 0% !important; */
+    width:30%;
+   
 }
 .video-conference .chat-side:target{
     display:block;
@@ -257,7 +260,6 @@ right: 5px;
   }
   @media only screen and (max-width: 800px) {
     .video-conference .chat-side {
-      left: 100%;
       width: 0%;
       transition:all 0.7s ease;
     }
@@ -265,7 +267,6 @@ right: 5px;
         width: 100%;
         transition:all 0.7s ease;
         position: relative !important;
-        right:0%;
     }
     .video-conference .chat-side.open{
        width: 100%;
@@ -275,7 +276,7 @@ right: 5px;
     .video-conference .main-side.openmain{
         width:0% !important;
         position: relative !important;
-        right: 100% !important;
+        
     }
     .fa-sign-out-alt{
         display: block !important;
@@ -342,7 +343,7 @@ right: 5px;
         .video-conference .main-side .navbar .grid-show img{
             height: 35px;
             width: 35px;
-            border-radius: 50%;
+            border-radius: 50%; 
             position: relative;
             bottom: 5px;
             cursor: pointer;

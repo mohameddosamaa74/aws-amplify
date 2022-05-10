@@ -50,6 +50,7 @@ const BottomBar = ({
   //   }
   return (
     <React.Fragment>
+
       <div className="footer">
         <div className="tools">
           <div className="dropdown">

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import react from 'react';
-import signpic from '../../../img/si.jpeg';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import Peer from 'simple-peer';
 import socket from '../socket';
@@ -15,6 +14,7 @@ import { Redirect } from 'react-router';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
+import Signlang from '../videochat/signlanguage';
 const Copy = () => {
   var Url = document.getElementById('paste-box');
   Url.value = window.location.href;
@@ -53,11 +53,12 @@ const openchat = () => {
   icon.onclick = () => {
     document.querySelector('.chat-side').classList.toggle('open');
     document.querySelector('#main').classList.toggle('openmain');
-    // document.querySelector('.fa-comment-dots').classList.toggle('active');
+    document.querySelector('.fa-comment-dots').classList.toggle('active');
   };
   iconphone.onclick = () => {
     document.querySelector('.chat-side').classList.toggle('open');
     document.querySelector('#main').classList.toggle('openmain');
+    document.querySelector('.fa-comment-dots').classList.toggle('active');
   };
 };
 const openpopup = () => {
@@ -97,9 +98,7 @@ const close = () => {
 const Roomaudio = (props) => {
   const [peers, setPeers] = useState([]);
   const [toSign, settoSign] = useState(false);
-  const [userVideoAudio, setUserVideoAudio] = useState({
-    localUser: { audio: true },
-  });
+  const [userVideoAudio, setUserVideoAudio] = useState({localUser: { audio: true }});
   const [screenRecod, setScreenRecor] = useState(false);
   const peersRef = useRef([]);
   const userVideoRef = useRef();
@@ -108,21 +107,14 @@ const Roomaudio = (props) => {
   const tempuser = localStorage.getItem('user');
   const user = JSON.parse(tempuser);
   const audio = userVideoAudio['localUser'].audio;
-  const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder(
-    { screen: true }
-  );
+  const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ screen: true });
   let {
     transcript,
     listening,
-    // interimTranscript,
-    // finalTranscript,
     // browserSupportsSpeechRecognition
   } = useSpeechRecognition();
   let text = useRef();
-  const [newContent, setnewcontent] = useState('');
-  const [isFinished, setisfinished] = useState(true);
   let senderName = useRef();
-
   // if (!browserSupportsSpeechRecognition) {
   //   return (<span>Browser doesn't support speech recognition.</span>)
   // }
@@ -230,8 +222,9 @@ const Roomaudio = (props) => {
               ({ peerID }) => peerID !== userId
             );
             setPeers((users) => {
-              return users.filter((user) => user.peerID !== userId);
-            });
+              users = users.filter((user) => user.peerID !== userId);
+              return [...users];
+                        });
           }
         });
       });
@@ -275,66 +268,6 @@ const Roomaudio = (props) => {
     }
     // eslint-disable-next-line
   }, [listening, audio,toSign]);
-  useEffect(() => {
-    setnewcontent(transcript);
-    // eslint-disable-next-line
-  }, [transcript]);
-  useEffect(() => {
-    if (toSign) {
-      console.log(newContent);
-      console.log({ isFinished });
-      if (isFinished) {
-        socket.emit('send-text', { data: newContent, roomId, name: user.name });
-        console.log('send text to backend');
-        setisfinished(false);
-        setnewcontent('');
-      }
-    }
-    // eslint-disable-next-line
-  }, [listening]);
-  useEffect(() => {
-    if (toSign) {
-      socket.on('receive-text', ({ data, name }) => {
-        console.log({ data });
-        if (text.current) {
-          text.current.textContent = data;
-        }
-        if (senderName.current) {
-          senderName.current.textContent = name;
-          console.log(senderName.current.textContent);
-        }
-      });
-      socket.on('send', () => {
-        console.log('finished sending 2');
-        setisfinished(true);
-        if (newContent.length > 0) {
-          socket.emit('send-text', {
-            data: newContent,
-            roomId,
-            name: user.name,
-          });
-          setisfinished(false);
-          setnewcontent('');
-        }
-      });
-      // recive data from the server
-      socket.on('receive-frame', ({ buffer }) => {
-        console.log('received frame from backend');
-        document.getElementById('stream_asl_a').src =
-          'data:image/jpeg;base64,' + arrayBufferToBase64(buffer);
-      });
-      const arrayBufferToBase64 = (buffer) => {
-        var binary = '';
-        var bytes = new Uint8Array(buffer);
-        var len = bytes.byteLength;
-        for (var i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        return window.btoa(binary);
-      };
-    }
-    // eslint-disable-next-line
-  }, [toSign]);
   function createPeer(userId, caller, stream) {
     const peer = new Peer({
       initiator: true,
@@ -524,12 +457,13 @@ const Roomaudio = (props) => {
                 </div>
                 <div className='vids'>
                   <div className='stream vid-item signlang'>
-                    <img
-                      id='stream_asl_a'
-                      className='sign'
-                      alt='ss'
-                      src={signpic}
-                    />
+                  <Signlang toSign={toSign}
+                   roomId={roomId}
+                   user={user}
+                  // settextcaption={(textcaption)=>settextcaption(textcaption)}
+                  text={text}
+                  senderName={senderName}
+                  />
                     <span className='name' ref={senderName}></span>
                   </div>
                   <div className='vid-item'>

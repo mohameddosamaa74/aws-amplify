@@ -5,7 +5,7 @@
    height: 100vh !important;
 }
  .video-conference .main-side{
-    width: 70% ;
+    width: 100% ;
     height:auto;
     transition:all 0.7s ease;
 }
@@ -25,7 +25,7 @@
         margin: 25px 3px
 }
 .openmain{
-    width: 100% !important;
+    width: 70% !important;
 }
  .video-conference .main-side .navbar .logo{
     position: relative;
@@ -97,10 +97,10 @@ margin: 14px 3px
 .fa-comment-dots{
     margin-left: 20px;
     font-size: 27px !important;
-    border-bottom: 2px solid #ddd;
+    
 }
 .fa-comment-dots.active{
-    border-bottom: none;
+    border-bottom: 2px solid white !important ;
 }
  .video-conference .main-side .vi{
     display: flex;
@@ -115,7 +115,7 @@ margin: 14px 3px
     margin-bottom: 10px;
     /* flex-wrap: wrap; */
     width: 100%;
-    height: 69px;
+    height: 43px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin: 0px 16px;
@@ -131,6 +131,7 @@ margin: 14px 3px
     padding: 10px;
     right: 0;
     color: white;
+    z-index: 5000;
     cursor: pointer !important;
 }
  .video-conference .main-side .vi .icon-opts ul i{
@@ -366,6 +367,7 @@ margin: 14px 3px
     top: 11px;
     display: none;
 }
+
  .video-conference .main-side .vi .vid-stream .vids{
     display: flex;
     flex-wrap: wrap;
@@ -377,8 +379,8 @@ position: relative;
 }
 
  .video-conference .main-side .vi .vid-stream .vids .vid-item{
-    width: 230px;
-    height: 173px;
+    width: 250px;
+    height: 190px;
     margin: 10px;
     overflow: hidden;
     position: relative;
@@ -388,6 +390,23 @@ position: relative;
     border-radius: 20px;
     width: 100%;
     height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: scaleX(-1);
+}
+.video-conference .main-side .vi .vid-stream .vids canvas{
+    border-radius: 20px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    display: none;
+    z-index: 0;
+}
+.showmediapipe{
+    display: block !important;
+    z-index: 1000 !important;
 }
  .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
     margin: 10px;
@@ -395,8 +414,8 @@ position: relative;
     position: relative;
     border-radius: 20px;
     display: none;
-    width: 230px;
-    height: 173px;
+    width: 250px;
+    height: 190px;
     border: 1px solid #333;
     text-align: center;
 }
@@ -418,6 +437,7 @@ position: relative;
     cursor: pointer;
     padding: 2px;
     font-size: 14px;
+    z-index: 5000;
 }
 
  .video-conference .main-side .vi .vid-stream .vids .vid-item .icon {
@@ -432,6 +452,7 @@ position: relative;
     cursor: pointer;
     width: 30px;
     text-align: center;
+    z-index: 5000;
 }
 .footer{
     display:flex;
@@ -463,8 +484,36 @@ position: relative;
     -webkit-animation: my-animation 14s linear infinite;
     animation: my-animation 14s linear infinite; */
 }
- 
+.captionsign{
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    width: -moz-fit-content;
+    overflow: hidden;
+    height: -moz-fit-content;
+    height: fit-content;
+    /* background-color: rgba(0,0,0,0.4); */
+    padding: 6px;
+    /* left: 47.4%; */
+    bottom: 10%;
+    position: relative;
+    width: fit-content;
+    display: none;
+    overflow-wrap: anywhere;
+    /* -moz-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%); */
+    /* -moz-animation: my-animation 14s linear infinite;
+    -webkit-animation: my-animation 14s linear infinite;
+    animation: my-animation 14s linear infinite; */
+}
 .caption .pcap{
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    
+}
+.captionsign .pcaps{
     font-size: 20px;
     font-weight: 300;
     color: white;
@@ -527,7 +576,7 @@ position: relative;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     transition: 1s ease;
-    bottom: 25px;
+    bottom: 20px;
   }
  
   .dropdown-content ul{
@@ -536,7 +585,7 @@ position: relative;
     height: fit-content;
     padding: 0px !important;
     margin: 0px !important;
-    text-align: center;
+    text-align: initial;
   }
   .dropdown-content ul li{
     margin: 0px !important;
@@ -555,7 +604,9 @@ position: relative;
     display: block;
     margin-bottom: 30px;
   }
-  
+  .fa-check{
+    color:white
+  }
 .footer .tools button{
 background: none;
 border: none;
@@ -656,8 +707,8 @@ width: 47px;
   }
   @media only screen and (max-width: 800px) {
      .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
-        width: 230px;
-        height: 173px;
+        width: 250px;
+        height: 190px;
     }
     .footer .buttons #phonealt{
 
@@ -665,29 +716,21 @@ width: 47px;
      
     }
      .video-conference .chat-side {
-      left: 100%;
       width: 0%;
       transition:all 0.7s ease;
     }
      .video-conference .main-side{
-        width: 100%;
+        width: 100%; 
         transition:all 0.7s ease;
         position: relative !important;
-        right:0%;
     }
      .video-conference .main-side .vi .vid-stream .opts{
         display: none;
     }
-     .video-conference .chat-side.open{
-       width: 100%;
-       display: block;
-       left: 0%;
-    }
-    
      .video-conference .main-side.openmain{
         width:0% !important;
         position: relative !important;
-        right: 100% !important;
+        right: 100%;
     }
     .fa-sign-out-alt{
         display: block !important;
@@ -789,8 +832,8 @@ width: 47px;
   }
   @media only screen and (max-width: 600px) {
      .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
-        width: 230px;
-        height: 173px;
+        width: 250px;
+        height: 190px;
     }
      .video-conference .main-side .navbar .logo {
         position: relative;
@@ -804,8 +847,8 @@ width: 47px;
         padding: 0px;
     }
      .video-conference .main-side .vi .vid-stream .vids .vid-item {
-        width: 230px;
-        height: 173px;
+        width: 250px;
+        height: 190px;
         margin: 5px;
         overflow: hidden;
         position: relative;

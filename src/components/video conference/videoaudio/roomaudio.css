@@ -5,7 +5,7 @@
    height: 100vh !important;
 }
 .roomaudio  .video-conference .main-side{
-    width: 70% ;
+    width: 100% ;
     height:auto;
     transition:all 0.7s ease;
 }
@@ -23,9 +23,6 @@
 .roomaudio  .video-conference .main-side ul li{
     display:inline-block;
         margin: 25px 3px
-}
-.openmain{
-    width: 100% !important;
 }
 .roomaudio  .video-conference .main-side .navbar .logo{
     position: relative;
@@ -97,10 +94,10 @@ margin: 14px 3px
 .fa-comment-dots{
     margin-left: 20px;
     font-size: 27px !important;
-    border-bottom: 2px solid #ddd;
+    border: none;
 }
 .fa-comment-dots.active{
-    border-bottom: none;
+    border-bottom: 2px solid white !important;
 }
 .roomaudio  .video-conference .main-side .vi{
     display: flex;
@@ -115,7 +112,7 @@ margin: 14px 3px
     margin-bottom: 10px;
     /* flex-wrap: wrap; */
     width: 100%;
-    height: 69px;
+    height: 43px;
     overflow-y: scroll;
     overflow-x: hidden;
     margin: 0px 16px;
@@ -411,7 +408,7 @@ position: relative;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .signlang .sign{
+.roomaudio  .video-conference .main-side .vi .vid-stream .vids .signlang .signvid{
     width: 100%;
     /* height: 104px; */
     border-radius: 0px;
@@ -540,7 +537,7 @@ position: relative;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     transition: 1s ease;
-    bottom: 25px;
+    bottom: 19px;
   }
  
   .dropdown-content ul{
@@ -549,7 +546,7 @@ position: relative;
     height: fit-content;
     padding: 0px !important;
     margin: 0px !important;
-    text-align: center;
+    text-align: initial;
   }
   .dropdown-content ul li{
     margin: 0px !important;
@@ -678,7 +675,6 @@ width: 47px;
      
     }
     .roomaudio  .video-conference .chat-side {
-      left: 100%;
       width: 0%;
       transition:all 0.7s ease;
     }
@@ -686,7 +682,6 @@ width: 47px;
         width: 100%;
         transition:all 0.7s ease;
         position: relative !important;
-        right:0%;
     }
     .roomaudio  .video-conference .main-side .vi .vid-stream .opts{
         display: none;
@@ -694,13 +689,14 @@ width: 47px;
     .roomaudio  .video-conference .chat-side.open{
        width: 100%;
        display: block;
-       left: 0%;
+       
     }
     
     .roomaudio  .video-conference .main-side.openmain{
         width:0% !important;
         position: relative !important;
-        right: 100% !important;
+        right: 100%;
+    
     }
     .fa-sign-out-alt{
         display: block !important;

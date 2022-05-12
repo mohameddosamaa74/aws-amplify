@@ -9,7 +9,7 @@ const Header = (props) => {
   const tempuser = localStorage.getItem("user");
   // console.log(tempuser)
   if (tempuser === null) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
   const user = JSON.parse(tempuser);
   // console.log(user)

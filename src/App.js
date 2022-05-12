@@ -10,13 +10,15 @@ import Calendarr from "./components/calendar/calendar";
 import Notifications from "./components/neffication/notifications";
 import Roomvideo from "./components/video conference/videochat/roomvideo";
 import Roomaudio from "./components/video conference/videoaudio/roomaudio";
+import LandingPage from "./components/Landingpage/Landingpage";
 // import Signlang from "./components/video conference/videochat/signlanguage";
 class App extends Component {
   render() {
     return (
       <react.Fragment>
         <Switch> 
-          <Route exact path="/" component={Form} />
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/login" component={Form} />
           <Route path="/roomvideo/:roomvideoId" component={Roomvideo} />
           <Route path="/roomaudio/:roomaudioId" component={Roomaudio} />
           <Route path="/home" component={Home} />

@@ -121,7 +121,7 @@ const Setting = (props) => {
   };
 
   if (tempuser === null) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   // console.log(tempuser)
@@ -320,7 +320,7 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
     }
   };
   if (tempuser === null) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 if(verify){
   return <Verification  phone={Phone} direct="updated" />

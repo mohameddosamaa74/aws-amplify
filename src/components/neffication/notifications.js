@@ -7,7 +7,7 @@ const Notifications = (props) => {
   const tempuser = localStorage.getItem("user");
 //   let user = JSON.parse(tempuser);
   if (tempuser === null) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
  
   return (

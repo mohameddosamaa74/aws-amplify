@@ -761,7 +761,7 @@ width: 47px;
      .video-conference .main-side.openmain{
         width:0% !important;
         position: relative !important;
-        right: 100%;
+        /* right: 100%; */
     }
     .fa-sign-out-alt{
         display: block !important;

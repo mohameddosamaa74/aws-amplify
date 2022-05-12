@@ -134,7 +134,7 @@ const Roomvideo = (props) => {
 
     window.addEventListener('popstate', goToBack);
     if (tempuser === null) {
-      return <Redirect to='/' />;
+      return <Redirect to='/login' />;
     }
     // setloading(true);
     // Connect Camera & Mic
@@ -456,7 +456,7 @@ setPeers((users) => {
     setScreenRecor(false);
   }, [mediaBlobUrl]);
   if (tempuser === null) {
-    return <Redirect to='/' />;
+    return <Redirect to='/login' />;
   }
   return (
     <react.Fragment>

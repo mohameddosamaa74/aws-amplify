@@ -63,7 +63,7 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
    let tempuser = localStorage.getItem("user");
     let user = JSON.parse(tempuser);
     let data2 = await fetch(
-      `https://backend-api-tabarani.herokuapp.com/api/users/${user.mobile}`,
+      `https://api.connect-asl.site/api/users/${user.mobile}`,
       {
         headers: this.header,
         method: "PATCH",
@@ -84,7 +84,7 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
 
   signup= async()=>{
     let data2 = await fetch(
-      `https://backend-api-tabarani.herokuapp.com/api/users/`,
+      `https://api.connect-asl.site/api/users/`,
       {
         headers: this.header,
         method: "POST",

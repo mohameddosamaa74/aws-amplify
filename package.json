@@ -77,6 +77,6 @@
   "engines": {
     "node": "16.4.0",
     "npm": "7.18.1"
-  },
-  "proxy": "https://backend-socket-tabarani.herokuapp.com/"
+  }
+  
 }

@@ -12,7 +12,7 @@ class Forget extends Component{
         const error=this.valid();
     if(error)return;
         //back end
-       //s const url="https://backend-api-tabarani.herokuapp.com/api/users";
+       //s const url="https://api.connect-asl.site/api/users";
     
     };
     valid = () =>{

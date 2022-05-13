@@ -1,5 +1,5 @@
 import react from "react";
-import signpic from "../../../img/si.jpeg";
+import signpic from "../../../img/sign.jpg";
 import React, { useEffect, useState } from "react";
 import socket from "../socket";
 import { useSpeechRecognition } from "react-speech-recognition";

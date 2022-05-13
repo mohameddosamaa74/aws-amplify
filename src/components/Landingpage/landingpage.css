@@ -1,6 +1,9 @@
 .landing{
     overflow: hidden;
 }
+.activelink{
+    border-bottom: 3px solid #cb7c1c;
+}
 .landing .land{
     height: 100vh;
     background: linear-gradient(118.54deg, #ED4690 -34.81%, #5522CC 63.38%);
@@ -43,6 +46,7 @@
 .landing .land .intro{
 display: flex;
 margin-top: 111px;
+padding: 0px 40px;
 }
 .landing .land .imgintro{
     width: 50%;
@@ -88,6 +92,7 @@ margin-top: 22px;
     background-color: #D2CAE4;
     
 }
+
 .landing .feature .contfeat{
     margin-top: 88px;
 }
@@ -237,12 +242,13 @@ width: 40%;
 }
 .landing .ourteam{
     text-align: center;
-    height: 100vh;
+    height: 100%;
     background-color: #fff;
     
 }
+
 .landing .ourteam .contour{
-    margin-top: 88px;
+    margin-top: 50px;
 
 }
 .landing .ourteam  img{
@@ -260,6 +266,7 @@ width: 40%;
     font-size: 40px;
     font-weight: bold;
     color: #2e068b;
+    padding-top: 54px;
 }
 .landing .ourteam span{
     font-size: 20px;
@@ -353,7 +360,7 @@ margin-bottom: 10px;
     background-color: #1e6282;padding: 20px 0;color: #fff;text-align: center;
 }
 .copy h3{font-size: 20px}
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1180px) {
     .landing .land .textintro h2{
         font-size: 28px;
         text-align: initial;
@@ -375,6 +382,7 @@ margin-bottom: 10px;
     .landing .land .intro{
         display: flex;
         margin-top: 111px;
+        padding: 0px;
         }
         .landing .land .imgintro{
             width: 50%;
@@ -440,6 +448,10 @@ margin-bottom: 10px;
             font-weight: bold;
             color: #6638d1;
         }
+        .landing .ourteam h1{
+            padding-top: 20px;
+            font-size: 30px;
+        }
         .landing .about{
             display: block;
             height: 100%;
@@ -484,7 +496,6 @@ margin-bottom: 10px;
             }
             .landing .work .contwork{
                 margin-top: 50px;
-               padding-bottom: 50px;
             }
             .landing .work  img{
                 margin-bottom: 15px;
@@ -494,8 +505,8 @@ margin-bottom: 10px;
                 font-weight: bold;
             }
             .landing .work h1{
-                padding-top: 54px;
-                font-size: 40px;
+                padding-top: 20px;
+                font-size: 30px;
                 font-weight: bold;
                 color: #2e068b;
             }
@@ -636,7 +647,7 @@ margin-bottom: 10px;
         }
         .landing .android .textapp .textcontent{
             margin-top: 50px;
-            padding:0px 100px;
+            padding:0px 40px;
         }
         .landing .android .textapp h3{
             font-size: 20px;
@@ -670,14 +681,13 @@ margin-bottom: 10px;
             padding: 20px
         }
         .landing .land .textintro h2{
-            font-size: 30px;
-            
+            font-size: 27px;
             margin-left: 27px;
             color: white;
             font-weight: bold;
         }
         .landing .land .textintro ul{
-        margin-top: 22px;
+        margin-top: 19px;
         }
         .landing .land .textintro ul li{
             font-size: 20px;
@@ -692,10 +702,6 @@ margin-bottom: 10px;
         }
         .landing .land .navbarr img{
             height: 40px;
-        }
-        .landing .land .navbarr .ulnav{
-            display: flex;
-            align-items: center;
         }
         .landing .land .navbarr .ulnav li{
             list-style: none;

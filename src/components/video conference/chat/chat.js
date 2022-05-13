@@ -5,6 +5,7 @@ import socket from '../socket';
 import { Redirect } from 'react-router';
 const Chat = ({ roomId }) => {
   const [msg, setMsg] = useState([]);
+  // const [msgpic, setMsgpic] = useState([]);
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
 
@@ -52,6 +53,24 @@ const Chat = ({ roomId }) => {
 
     console.log('sent');
   };
+    function importData() {
+      let input = document.createElement('input');
+      input.type = 'file';
+      input.accept='image/*'
+      input.onchange = (e)=> {
+        // you can use this method to get file and perform respective operations
+                // let files =   Array.from(input.files);
+                // console.log(files);
+                // let file = e.target.files[0];
+                // const formData = new FormData();
+                // formData.append('image', file, file.name);
+                // console.log(file)
+                // const text = document.getElementById('textt');
+                
+            };
+      input.click();
+      
+    }
 
   return (
     <react.Fragment>
@@ -94,7 +113,7 @@ const Chat = ({ roomId }) => {
           <p>{/* <span>david </span>is typing.... */}</p>
           <div className='textin'>
             <div className='feat'>
-              <i className='fas fa-image'></i>
+              <i className='fas fa-image'id='imggg' onClick={importData}></i>
               {/* <i className="fas fa-microphone"></i> */}
             </div>
 

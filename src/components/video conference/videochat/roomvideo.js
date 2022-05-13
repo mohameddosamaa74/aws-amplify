@@ -149,7 +149,7 @@ const Roomvideo = (props) => {
       .then((stream) => 
       {
         setloading(false)
-        // userVideoRef.current.srcObject = stream;
+        userVideoRef.current.srcObject = stream;
         userStream.current = stream;
         socket.emit('BE-join-room', {
           roomId,

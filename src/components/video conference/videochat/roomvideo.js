@@ -151,7 +151,6 @@ const Roomvideo = (props) => {
         setloading(false)
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
-        console.log(props);
         socket.emit('BE-join-room', {
           roomId,
           user,
@@ -232,6 +231,8 @@ setPeers((users) => {
             });
           }
         });
+      }).catch((error)=>{
+        alert("error")
       });
 
     socket.on('FE-toggle-camera', ({ userId, switchTarget }) => {

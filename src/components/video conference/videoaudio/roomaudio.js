@@ -145,7 +145,6 @@ const Roomaudio = (props) => {
       .getUserMedia({ video: false, audio: true })
       .then((stream) => {
         setloading(false);
-
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
         socket.emit('BE-join-room', {

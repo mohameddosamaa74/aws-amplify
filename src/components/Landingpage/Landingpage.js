@@ -78,7 +78,7 @@ activeLink()
             <div className="feature"id="service">
 
                 <h1>Check Out All Feature</h1>
-                <div class="colorbar1"></div>
+                <div className="colorbar1"></div>
               <div className="contfeat">
                 <div className="row">
                     <div className="col-lg-4 col-sm-6">
@@ -153,7 +153,7 @@ Connect app allows you to Work and Study from anywhere. The ability to deliver p
             </div>
             <div className="work" id="how">
                 <h1>How does it work</h1>
-                <div class="colorbar1"></div>
+                <div className="colorbar1"></div>
                 <div className="contwork">
                 <div className="row">
                     <div className="col-lg-4 col-md-6 ">
@@ -196,7 +196,7 @@ Connect app allows you to Work and Study from anywhere. The ability to deliver p
             <div className="ourteam"id="about">
 
                 <h1>Meet Our Team</h1>
-                <div class="colorbar1"></div>
+                <div className="colorbar1"></div>
                 <div className="contour">
                 <div className="row">
                     <div className="col-lg-3 col-md-6">
@@ -257,10 +257,8 @@ Connect app allows you to Work and Study from anywhere. The ability to deliver p
                     </div>
                     <div className="col-lg-3 col-md-6">
                         <div className="ourteaminfo">
-                        <div className="featuerii">
                                  <div className="im">
                            <img src={member8} alt="icon8"/>
-                           </div>
                            </div>
                            <h3>Mennat Allah Kamal</h3>
                            <span>UI/UX Designer</span>

@@ -283,6 +283,7 @@ width: 40%;
 }
 .landing .ourteam .ourteaminfo{
     display: inline-block;
+    text-align: -webkit-center;
 }
 .landing .android{
     height: 100vh;

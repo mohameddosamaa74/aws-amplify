@@ -12,13 +12,13 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
     // eslint-disable-next-line
   }, [transcript]);
   useEffect(() => {
-    if (toSign) {
+    if(newContent.length>0){
       console.log(newContent);
       console.log({ isFinished });
       if (isFinished) {
         socket.emit("send-text", {
           data: newContent,
-          roomId,
+          roomId:roomId+"voicetosign",
           name: user.name,
         });
         console.log("send text to backend");
@@ -29,7 +29,7 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
     // eslint-disable-next-line
   }, [listening]);
   useEffect(() => {
-    if (toSign) {
+    
       socket.on("receive-text", ({ data, name }) => {
         console.log({ data });
         if (text.current) {
@@ -47,7 +47,7 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
         if (newContent.length > 0) {
           socket.emit("send-text", {
             data: newContent,
-            roomId,
+            roomId:roomId+"voicetosign",
             name: user.name,
           });
           setisfinished(false);
@@ -69,9 +69,8 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
         }
         return window.btoa(binary);
       };
-    }
     // eslint-disable-next-line
-  }, [toSign]);
+  }, []);
   return (
     <react.Fragment>
       <img id="stream_asl_v" alt="ss" src={signpic} className="signvid" />

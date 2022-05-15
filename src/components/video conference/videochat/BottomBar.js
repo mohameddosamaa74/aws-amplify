@@ -20,7 +20,8 @@ const BottomBar = ({
   settoSign, 
   senderName,
   setsignToText,
-  textcaption
+  textcaption,
+  roomId
 }) => {
   const [sendNameStext,setsendNameStext]=useState("")
   const [sendNameVs,setsendNameVs]=useState("")
@@ -48,6 +49,12 @@ const BottomBar = ({
         tool[0].classList.toggle("activetool"); 
         sign.classList.toggle("showsign");
         settoSign(signcheck => !signcheck)
+        if(toSign){
+          socket.emit("leave-sign-room",{roomId:roomId+"voicetosign"})}
+       
+        else{
+          socket.emit("join-sign-room",{roomId:roomId+"voicetosign"})
+        } 
       };
       tool[1].onclick = () => {
         const caption = document.querySelector(".caption");

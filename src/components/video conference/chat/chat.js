@@ -5,7 +5,7 @@ import socket from '../socket';
 import { Redirect } from 'react-router';
 const Chat = ({ roomId }) => {
   const [msg, setMsg] = useState([]);
-  // const [msgpic, setMsgpic] = useState([]);
+  const [msgpic, setMsgpic] = useState();
   const messagesEndRef = useRef(null);
   const inputRef = useRef();
 
@@ -39,6 +39,7 @@ const Chat = ({ roomId }) => {
     const msg = text.value;
     // localStorage.setItem("text",text.value);
     if (msg) {
+ 
       console.log(msg);
       console.log({ socket: socket });
       console.log({ roomId, msg, sender: currentUser, img: imageuser });
@@ -50,29 +51,33 @@ const Chat = ({ roomId }) => {
       });
       inputRef.current.value = '';
     }
-
     console.log('sent');
   };
+//   if(msgpic){
+//   useEffect(()=>{
+//       setMsg(msgpic)
+//   },[msgpic])
+// }
     function importData() {
       let input = document.createElement('input');
       input.type = 'file';
       input.accept='image/*'
       input.onchange = (e)=> {
-        // you can use this method to get file and perform respective operations
-                // let files =   Array.from(input.files);
-                // console.log(files);
-                // let file = e.target.files[0];
-                // const formData = new FormData();
-                // formData.append('image', file, file.name);
-                // console.log(file)
+                let file = e.target.files[0];
+                const formData = new FormData();
+                formData.append('image', file, file.name);
+                setMsgpic(file)
+                console.log(file)
                 // const text = document.getElementById('textt');
+              
+               
+                
                 
             };
       input.click();
-      
+    console.log(msgpic)
     }
-
-  return (
+  return ( 
     <react.Fragment>
       <div className='chat-side' id='chat'>
         <i className='fas fa-sign-out-alt'></i>

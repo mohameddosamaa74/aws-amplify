@@ -478,7 +478,7 @@ const Roomaudio = (props) => {
                       <img src={user.image} alt='as' />
                       <video
                         ref={userVideoRef}
-                        muted
+                      
                         autoPlay
                         playsInline
                       ></video>
@@ -511,6 +511,7 @@ const Roomaudio = (props) => {
               senderName={senderName}
               toggleRecording={toggleRecording}
               screenRecod={screenRecod}
+              roomId={roomId}
             />
           </div>
           <Chat roomId={roomId}/>

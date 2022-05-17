@@ -1,122 +1,125 @@
-import react, { Component } from "react";
-import {Redirect} from "react-router-dom";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
-import "./form.css";
-import Verification from "../verification/verification";
+import react, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import './form.css';
+import Verification from '../verification/verification';
 // import firebase from "../firebase";
 // import "firebase/compat/auth"
 // import "firebase/compat/firestore"
-import authentication from "../firebase";
-import {RecaptchaVerifier,signInWithPhoneNumber  } from "firebase/auth";
-import logo from "../../img/log.png"
-import gender from "../../img/gender.png"
-import Loader from '../loader/loader'
+import authentication from '../firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import logo from '../../img/log.png';
+import gender from '../../img/gender.png';
+import Loader from '../loader/loader';
 class Form extends Component {
   state = {
-    username: "",
-    mobile: "",
-    pass: "",
-    confirm: "",
+    username: '',
+    mobile: '',
+    pass: '',
+    confirm: '',
     error: {},
-    loginn: "",
-    mobilelog: "",
-    passlog: "",
-    gender: "",
-    loading:false
+    loginn: '',
+    mobilelog: '',
+    passlog: '',
+    gender: '',
+    loading: false,
   };
   setUpRecaptcha = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
-      'size': 'invisible',
-      'callback': (response) => {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        // onSignInSubmit();
-      }
-    },authentication);
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      'sign-in-button',
+      {
+        size: 'invisible',
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // onSignInSubmit();
+        },
+      },
+      authentication
+    );
   };
   repp = () => {
-    const signUpButton = document.getElementById("signUp");
-    const signInButton = document.getElementById("signIn");
-    const form = document.getElementById("formm");
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const form = document.getElementById('formm');
 
-    signUpButton.addEventListener("click", () => {
-      form.classList.add("right-panel-active");
+    signUpButton.addEventListener('click', () => {
+      form.classList.add('right-panel-active');
     });
 
-    signInButton.addEventListener("click", () => {
-      form.classList.remove("right-panel-active");
+    signInButton.addEventListener('click', () => {
+      form.classList.remove('right-panel-active');
     });
   };
   componentDidMount() {
     this.repp();
   }
   header = {
-    API_KEY:
-      "382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b",
-    "Content-Type": "application/json",
+    API_KEY: process.env.REACT_APP_API_KEY,
+    'Content-Type': 'application/json',
     // 'Content-Type': 'application/x-www-form-urlencoded',
   };
   handlesubsignup = async (e) => {
     e.preventDefault();
- 
+
     const error = this.validsignup();
     if (error) return;
-    this.setState({loading:true})
+    this.setState({ loading: true });
     //back end
     let data = await fetch(
       `https://api.connect-asl.site/api/users/${this.state.mobile}`,
       {
         headers: this.header,
-        method: "GET",
+        method: 'GET',
       }
     );
     let res = await data.json();
-  
+
     console.log(res);
-    if (res.status === "success") {
-      this.setState({loading:false})
+    if (res.status === 'success') {
+      this.setState({ loading: false });
       const error = {};
-      error.mobile = "this mobile already exist";
+      error.mobile = 'this mobile already exist';
       this.setState({ error });
-      
+
       return;
     }
-    
-  this.setUpRecaptcha()
-  const phoneNumber ='+'+ this.state.mobile
-const appVerifier = window.recaptchaVerifier;
-signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-      this.setState({loading:false})
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      this.setState({
-        loginn:"true"
+
+    this.setUpRecaptcha();
+    const phoneNumber = '+' + this.state.mobile;
+    const appVerifier = window.recaptchaVerifier;
+    signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        this.setState({ loading: false });
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        this.setState({
+          loginn: 'true',
+        });
+        window.confirmationResult = confirmationResult;
+        console.log('sent');
       })
-      window.confirmationResult = confirmationResult;
-      console.log("sent");
-    
-    }).catch((error) => {
-      this.setState({loading:false})
-    });
+      .catch((error) => {
+        this.setState({ loading: false });
+      });
   };
   validsignup = () => {
     const error = {};
-    if (this.state.username.trim() === "") { 
-      error.username = "username is require";
+    if (this.state.username.trim() === '') {
+      error.username = 'username is require';
     } else if (this.state.username.length < 3) {
-      error.username = "username must be bigger than 2";
+      error.username = 'username must be bigger than 2';
     }
-    if (this.state.pass.trim() === "") {
-      error.pass = "password is require";
+    if (this.state.pass.trim() === '') {
+      error.pass = 'password is require';
     } else if (this.state.pass.length < 8) {
-      error.pass = "password must be bigger than 8";
+      error.pass = 'password must be bigger than 8';
     }
-    
+
     if (this.state.confirm !== this.state.pass)
-      error.confirm = "must enter the same pass";
-    if (this.state.mobile.trim() === "") error.mobile = "mobile is require";
-    if (this.state.gender === "") error.gender = "gender is require";
+      error.confirm = 'must enter the same pass';
+    if (this.state.mobile.trim() === '') error.mobile = 'mobile is require';
+    if (this.state.gender === '') error.gender = 'gender is require';
     this.setState({ error });
     return Object.keys(error).length === 0 ? null : error;
   };
@@ -128,18 +131,17 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
   /*log in*/
   handlesublogin = async (e) => {
     e.preventDefault();
-  
+
     const error = this.validlogin();
     if (error) return;
     //back end
-    this.setState({loading:true})
-    const url = "https://api.connect-asl.site/api/users/login";
+    this.setState({ loading: true });
+    const url = 'https://api.connect-asl.site/api/users/login';
     const data = await fetch(url, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
-        API_KEY:
-          "382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b",
-        "Content-Type": "application/json",
+        API_KEY: process.env.REACT_APP_API_KEY,
+        'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
@@ -149,28 +151,28 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
     });
     const res = await data.json();
     // this.setState({loading:true})
-    if (res.status === "error") {
-      this.setState({loading:false})
+    if (res.status === 'error') {
+      this.setState({ loading: false });
       const error = {};
       error.mobilelog = res.message.mobile;
       error.passlog = res.message.password;
       this.setState({ error });
     }
-    if (res.status === "success") {
-      this.setState({loading:false})
+    if (res.status === 'success') {
+      this.setState({ loading: false });
       console.log(res);
       delete res.data._id;
-      localStorage.setItem("user",JSON.stringify(res.data))
+      localStorage.setItem('user', JSON.stringify(res.data));
       this.setState({
-        loginn:"login"
-      })
-    }  
+        loginn: 'login',
+      });
+    }
   };
   validlogin = () => {
     const error = {};
-    if (this.state.mobilelog.trim() === "")
-      error.mobilelog = "mobile is require";
-    if (this.state.passlog.trim() === "") error.passlog = "password is require";
+    if (this.state.mobilelog.trim() === '')
+      error.mobilelog = 'mobile is require';
+    if (this.state.passlog.trim() === '') error.passlog = 'password is require';
     this.setState({ error });
     return Object.keys(error).length === 0 ? null : error;
   };
@@ -180,7 +182,7 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
     this.setState(state);
   };
   render() {
-    if (this.state.loginn === "true") {
+    if (this.state.loginn === 'true') {
       return (
         <react.Fragment>
           <Verification
@@ -194,22 +196,22 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
         </react.Fragment>
       );
     }
-    if (this.state.loginn === "login") {
-
+    if (this.state.loginn === 'login') {
       return (
-      <react.Fragment>
-      <Redirect to="/home" />
-      </react.Fragment>
-      );    }
-   
+        <react.Fragment>
+          <Redirect to="/home" />
+        </react.Fragment>
+      );
+    }
+
     return (
       <react.Fragment>
         <div id="sign-in-button"></div>
-        {this.state.loading? <Loader/>:null}
+        {this.state.loading ? <Loader /> : null}
         <div className="form" id="formm">
           <div className="form-container sign-up" id="s">
             <form onSubmit={this.handlesubsignup}>
-              <img src={logo} alt="logo"/>
+              <img src={logo} alt="logo" />
               <h1 className="REGTITLE">REGISTER</h1>
               <div className="inputcontainer">
                 <i className="fas fa-user"></i>
@@ -261,15 +263,16 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
               {this.state.error.confirm && (
                 <span className="text-danger">{this.state.error.confirm}</span>
               )}
-               <div className="inputcontainer">
-                 <img src={gender}alt="gender"/>
-              <select onChange={this.handlechangesignup} name="gender">
-                <option defaultValue hidden >
-                  Gender
-                </option>
-                <option>Male</option>
-                <option>Female</option>
-              </select></div>
+              <div className="inputcontainer">
+                <img src={gender} alt="gender" />
+                <select onChange={this.handlechangesignup} name="gender">
+                  <option defaultValue hidden>
+                    Gender
+                  </option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
               {this.state.error.gender && (
                 <span className="text-danger">{this.state.error.gender}</span>
               )}
@@ -291,7 +294,7 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
           </div>
           <div className="form-container sign-in" id="l">
             <form onSubmit={this.handlesublogin}>
-            <img src={logo} alt="logo"/>
+              <img src={logo} alt="logo" />
               <h1 className="LOGTITLE">LOGIN</h1>
               {/* <p className="text-center">enter your accout details </p> */}
               <div className="inputcontainer">
@@ -321,12 +324,12 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
                 <span className="text-danger">{this.state.error.passlog}</span>
               )}
               <button type="submit" className="login">
-              LOGIN
+                LOGIN
               </button>
               <p className="agree logg">
                 you need create account ?
                 <a href="#s" className="log">
-                 REGISTER
+                  REGISTER
                 </a>
               </p>
               {/* <Link to="/forget">forget your password..?</Link> */}
@@ -338,24 +341,24 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
               <div className="overlay-panel overlay-left">
                 <h2 className="titleoverlay">Welcome Back!</h2>
                 <p>
-                  To keep connected with us <br/>please login with your <br/>personal info
+                  To keep connected with us <br />
+                  please login with your <br />
+                  personal info
                 </p>
                 <button className="go" id="signIn">
-                 LOGIN
+                  LOGIN
                 </button>
               </div>
               <div className="overlay-panel overlay-right">
                 <h1 className="titleoverlay">Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
                 <button className="go" id="signUp">
-                REGISTER
+                  REGISTER
                 </button>
               </div>
             </div>
           </div>
         </div>
-       
-       
       </react.Fragment>
     );
   }

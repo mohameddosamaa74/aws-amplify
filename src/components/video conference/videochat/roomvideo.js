@@ -27,7 +27,7 @@ const Copy = () => {
 const grid = () => {
   const grid6 = document.getElementById('grid6');
   const grid4 = document.getElementById('grid4');
-  const grid1 = document.getElementById('grid1');
+  // const grid1 = document.getElementById('grid1');
   const vids = document.querySelector('.vids');
   const viditem = document.querySelectorAll('.vid-item');
   for (let i = 0; i < viditem.length; i++) {
@@ -121,7 +121,7 @@ const Roomvideo = (props) => {
   // if (!browserSupportsSpeechRecognition) {
   //   return (<span>Browser doesn't support speech recognition.</span>)
   // }
- 
+
   useEffect(() => {
     // Get Video Devices
     // navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -130,7 +130,9 @@ const Roomvideo = (props) => {
     // });
 
     // Set Back Button Event
-
+    navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia || 
+      navigator.mediaDevices.webKitGetUserMedia || navigator.mediaDevices.moxGetUserMedia ||
+       navigator.mediaDevices.mozGetUserMedia || navigator.mediaDevices.msGetUserMedia);
     window.addEventListener('popstate', goToBack);
     if (tempuser === null) {
       return <Redirect to='/login' />;
@@ -138,8 +140,9 @@ const Roomvideo = (props) => {
     // setloading(true);
     // Connect Camera & Mic
     setloading(true)
+   
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia({ video: true , audio: true })
       .then((stream) => 
       {
         setloading(false)
@@ -361,8 +364,6 @@ setPeers((users) => {
           userVideoRef.current.srcObject.getAudioTracks()[0];
         audioSwitch = !audioSwitch;
         userAudioTrack.enabled = audioSwitch;
-
-
         // audioSwitch ? speechRecognition.start() : speechRecognition.stop();
       }
 
@@ -550,7 +551,6 @@ setPeers((users) => {
                       ></video>
                       <SignToText
                       roomId={roomId}
-                       uservideo={userVideoRef}
                        textsign={textsign}
                        signToText={signToText}
                        audio={audio}

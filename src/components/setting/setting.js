@@ -1,122 +1,123 @@
-import react, { useState } from "react";
-import { Redirect, useHistory } from "react-router";
-import Verification from "../verification/verification";
-import Header from "../video conference/home/header";
-import Navbar from "../video conference/navbar/navbar";
-import authentication from "../firebase";
-import {RecaptchaVerifier,signInWithPhoneNumber  } from "firebase/auth";
-import "./setting.css";
-import Loader from "../loader/loader";
+import react, { useState } from 'react';
+import { Redirect, useHistory } from 'react-router';
+import Verification from '../verification/verification';
+import Header from '../video conference/home/header';
+import Navbar from '../video conference/navbar/navbar';
+import authentication from '../firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
+import './setting.css';
+import Loader from '../loader/loader';
 const Setting = (props) => {
   // console.log(tempuser)
-  const history=useHistory()
-    let tempuser = localStorage.getItem("user");
+  const history = useHistory();
+  let tempuser = localStorage.getItem('user');
   let user = JSON.parse(tempuser);
   if (tempuser === null) {
-  history.push("/")
+    history.push('/');
   }
 
   const [formValue, setFormValue] = useState({
     Name: user.name,
     Phone: user.mobile,
     Gender: user.gender,
-    oldPassword:'',
-    newPassword:'',
-    confirmNewPassword:''
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
   });
- 
+
   const [picture, setpicture] = useState();
   const [verify, setverify] = useState(false);
   const [load, setload] = useState(false);
   const [error, seterror] = useState({});
   const setUpRecaptcha = () => {
-    window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
-      'size': 'invisible',
-      'callback': (response) => {
-        // reCAPTCHA solved, allow signInWithPhoneNumber.
-        // onSignInSubmit();
-      }
-    },authentication);
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      'sign-in-button',
+      {
+        size: 'invisible',
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // onSignInSubmit();
+        },
+      },
+      authentication
+    );
   };
-  const logout=()=>{
+  const logout = () => {
     window.localStorage.removeItem('user');
-    history.push("/")
-  }
+    history.push('/');
+  };
   const validation = () => {
     const error = {};
-    if (Name.trim() === "") { 
-      error.Name = "username is require";
+    if (Name.trim() === '') {
+      error.Name = 'username is require';
     } else if (Name.length < 3) {
-      error.Name = "username must be bigger than 2";
+      error.Name = 'username must be bigger than 2';
     }
-    if(!document.getElementById("inputpass").disabled){
-    if (oldPassword.trim() === "") {
-      error.oldPassword = "password is require";
-    } 
- 
-    if (newPassword.trim() === "") {
-      error.newPassword = "password is require";
-    } 
-    if (confirmNewPassword.trim() === "") {
-      error.confirmNewPassword = "password is require";
-    } 
- 
-    else if (newPassword.length < 8) {
-      error.newPassword= "password must be bigger than 8";
+    if (!document.getElementById('inputpass').disabled) {
+      if (oldPassword.trim() === '') {
+        error.oldPassword = 'password is require';
+      }
+
+      if (newPassword.trim() === '') {
+        error.newPassword = 'password is require';
+      }
+      if (confirmNewPassword.trim() === '') {
+        error.confirmNewPassword = 'password is require';
+      } else if (newPassword.length < 8) {
+        error.newPassword = 'password must be bigger than 8';
+      }
+      if (confirmNewPassword !== newPassword)
+        error.confirmNewPassword = 'must enter the same pass';
     }
-    if (confirmNewPassword !== newPassword)
-      error.confirmNewPassword = "must enter the same pass";
-    }
-    if (Phone.trim() === "") error.Phone = "mobile is require";
-    if (Gender === "") error.Gender = "gender is require";
-    seterror(error)
+    if (Phone.trim() === '') error.Phone = 'mobile is require';
+    if (Gender === '') error.Gender = 'gender is require';
+    seterror(error);
     return Object.keys(error).length === 0 ? null : error;
   };
   const editbutton = (e) => {
- 
-    const editname = document.getElementById("editname");
-    const editphone = document.getElementById("editphone");
-    const editgender = document.getElementById("editgender");
-    const editpass = document.getElementById("editpass");
-    const cancel = document.getElementById("cancel");
-    const inputsetting = document.getElementsByClassName("inputsetting");
+    const editname = document.getElementById('editname');
+    const editphone = document.getElementById('editphone');
+    const editgender = document.getElementById('editgender');
+    const editpass = document.getElementById('editpass');
+    const cancel = document.getElementById('cancel');
+    const inputsetting = document.getElementsByClassName('inputsetting');
     editname.onclick = () => {
-      document.getElementById("inputname").removeAttribute("disabled");
-      document.getElementById("saveandcancel").style.display = "block";
-      document.getElementById("inputname").style.border = "1px solid white";
+      document.getElementById('inputname').removeAttribute('disabled');
+      document.getElementById('saveandcancel').style.display = 'block';
+      document.getElementById('inputname').style.border = '1px solid white';
     };
     editphone.onclick = () => {
-      document.getElementById("inputphone").removeAttribute("disabled");
-      document.getElementById("saveandcancel").style.display = "block";
-      document.getElementById("inputname").style.border = "1px solid white";
+      document.getElementById('inputphone').removeAttribute('disabled');
+      document.getElementById('saveandcancel').style.display = 'block';
+      document.getElementById('inputname').style.border = '1px solid white';
     };
     editgender.onclick = () => {
-      document.getElementById("inputgender").removeAttribute("disabled");
-      document.getElementById("saveandcancel").style.display = "block";
-      document.getElementById("inputname").style.border = "1px solid white";
+      document.getElementById('inputgender').removeAttribute('disabled');
+      document.getElementById('saveandcancel').style.display = 'block';
+      document.getElementById('inputname').style.border = '1px solid white';
     };
     editpass.onclick = () => {
-      document.getElementById("inputpass").removeAttribute("disabled");
-      document.getElementById("hidepass").style.display = "block";
-      document.getElementById("inputname").style.border = "1px solid white";
-      document.getElementById("oldpass").textContent = "Enter Old Password";
-      document.getElementById("saveandcancel").style.display = "block";
+      document.getElementById('inputpass').removeAttribute('disabled');
+      document.getElementById('hidepass').style.display = 'block';
+      document.getElementById('inputname').style.border = '1px solid white';
+      document.getElementById('oldpass').textContent = 'Enter Old Password';
+      document.getElementById('saveandcancel').style.display = 'block';
     };
     cancel.onclick = (e) => {
       // eslint-disable-next-line
       window.location.href = window.location.href;
-      document.getElementById("saveandcancel").style.display = "none";
-      document.getElementById("inputgender").value = user.gender;
-      document.getElementById("inputname").value = user.name;
-      document.getElementById("inputphone").value = user.mobile;
+      document.getElementById('saveandcancel').style.display = 'none';
+      document.getElementById('inputgender').value = user.gender;
+      document.getElementById('inputname').value = user.name;
+      document.getElementById('inputphone').value = user.mobile;
       for (let i = 0; i < inputsetting.length; i++) {
-        inputsetting[i].setAttribute("disabled", "disabled");
+        inputsetting[i].setAttribute('disabled', 'disabled');
       }
-      document.getElementById("hidepass").style.display = "none";
-      document.getElementById("oldpass").textContent = "Password";
+      document.getElementById('hidepass').style.display = 'none';
+      document.getElementById('oldpass').textContent = 'Password';
       document
-        .getElementById("inputgender")
-        .setAttribute("disabled", "disabled");
+        .getElementById('inputgender')
+        .setAttribute('disabled', 'disabled');
     };
   };
 
@@ -134,160 +135,145 @@ const Setting = (props) => {
       };
     });
   };
-  const { Name, Phone, Gender,oldPassword,newPassword,confirmNewPassword } = formValue;
+  const { Name, Phone, Gender, oldPassword, newPassword, confirmNewPassword } =
+    formValue;
   const urldata = `https://api.connect-asl.site/api/users/${user.mobile}`;
   const handlesetting = async (e) => {
     e.preventDefault();
     const error = validation();
     if (error) return;
-    setload(true)
-    if(!document.getElementById("inputname").disabled){
-    let data = await fetch(urldata,
-      {
-        method: "PATCH",
+    setload(true);
+    if (!document.getElementById('inputname').disabled) {
+      let data = await fetch(urldata, {
+        method: 'PATCH',
         body: JSON.stringify({
           name: Name,
         }),
         headers: {
-          "Content-Type": "application/json",
-        API_KEY:
-        '382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b',
+          'Content-Type': 'application/json',
+          API_KEY: process.env.REACT_APP_API_KEY,
+        },
+      });
+      let res = await data.json();
+      if (res.status === 'success') {
+        document.getElementById('saveandcancel').style.display = 'none';
+        setload(false);
+        localStorage.setItem('user', JSON.stringify(res.data));
+        console.log(res);
+      } else {
+        setload(false);
+        console.log('error');
       }
     }
-    );
-    let res = await data.json();
-    if (res.status === "success") {
-      document.getElementById("saveandcancel").style.display = "none";
-      setload(false)
-      localStorage.setItem("user", JSON.stringify(res.data));
-      console.log(res)
-    }
-    else{
-      setload(false)
-      console.log("error")
-    }
-  }
-  if(!document.getElementById("inputgender").disabled){
-    let data = await fetch(urldata,
-      {
-        method: "PATCH",
+    if (!document.getElementById('inputgender').disabled) {
+      let data = await fetch(urldata, {
+        method: 'PATCH',
         body: JSON.stringify({
-          gender:Gender,
+          gender: Gender,
         }),
         headers: {
-          "Content-Type": "application/json",
-        API_KEY:
-        '382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b',
+          'Content-Type': 'application/json',
+          API_KEY: process.env.REACT_APP_API_KEY,
+        },
+      });
+      let res = await data.json();
+      if (res.status === 'success') {
+        document.getElementById('saveandcancel').style.display = 'none';
+        setload(false);
+        localStorage.setItem('user', JSON.stringify(res.data));
+        console.log(res);
+      } else {
+        setload(false);
+        console.log('error');
       }
     }
-    );
-    let res = await data.json();
-    if (res.status === "success") {
-      document.getElementById("saveandcancel").style.display = "none";
-      setload(false)
-      localStorage.setItem("user", JSON.stringify(res.data));
-      console.log(res)
-    }
-    else{
-      setload(false)
-      console.log("error")
-    }
-  }
-  if(!document.getElementById("inputphone").disabled){
-    let data = await fetch(
-      `https://api.connect-asl.site/api/users/${Phone}`,
-      {
-        method: "GET",
-        headers: {
-        "Content-Type":"application/json",
-        API_KEY:
-        '382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b',
-      }
-    }
-    );
-    let res = await data.json();
-    console.log(res);
-    if (res.status === "success") {
-      document.getElementById("saveandcancel").style.display = "none";
-      setload(false)
-      const error = {};
-      error.mobile = "this mobile already exist";
-      seterror(error)
-      console.log(error.mobile)
-      return;
-    }
-  setUpRecaptcha()
-  const phoneNumber ='+'+ Phone
-const appVerifier = window.recaptchaVerifier;
-signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
-    .then((confirmationResult) => {
-     setload(false)
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-   setverify(true)
-      window.confirmationResult = confirmationResult;
-      console.log("sent");
-    
-    }).catch((error) => {
-      setload(false)
-    });
-}
-
-  if(!document.getElementById("inputpass").disabled){
-    const data = await fetch(`https://api.connect-asl.site/api/users/login`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        API_KEY:
-          "382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password:oldPassword,
-        mobile:Phone
-      }), 
-    });
-    const res = await data.json();
-    if (res.status === "error") {
-      setload(false)
-      const error = {};
-      error.oldPassword = "the old password is not correctly";
-     seterror(error)
-     console.log("error old pass")
-    }
-    if (res.status === "success") {
-
-      console.log("sucsessold pass")
-      let data = await fetch(urldata,
+    if (!document.getElementById('inputphone').disabled) {
+      let data = await fetch(
+        `https://api.connect-asl.site/api/users/${Phone}`,
         {
-          method: "PATCH",
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            API_KEY: process.env.REACT_APP_API_KEY,
+          },
+        }
+      );
+      let res = await data.json();
+      console.log(res);
+      if (res.status === 'success') {
+        document.getElementById('saveandcancel').style.display = 'none';
+        setload(false);
+        const error = {};
+        error.mobile = 'this mobile already exist';
+        seterror(error);
+        console.log(error.mobile);
+        return;
+      }
+      setUpRecaptcha();
+      const phoneNumber = '+' + Phone;
+      const appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          setload(false);
+          // SMS sent. Prompt user to type the code from the message, then sign the
+          // user in with confirmationResult.confirm(code).
+          setverify(true);
+          window.confirmationResult = confirmationResult;
+          console.log('sent');
+        })
+        .catch((error) => {
+          setload(false);
+        });
+    }
+
+    if (!document.getElementById('inputpass').disabled) {
+      const data = await fetch(`https://api.connect-asl.site/api/users/login`, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          API_KEY: process.env.REACT_APP_API_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: oldPassword,
+          mobile: Phone,
+        }),
+      });
+      const res = await data.json();
+      if (res.status === 'error') {
+        setload(false);
+        const error = {};
+        error.oldPassword = 'the old password is not correctly';
+        seterror(error);
+        console.log('error old pass');
+      }
+      if (res.status === 'success') {
+        console.log('sucsessold pass');
+        let data = await fetch(urldata, {
+          method: 'PATCH',
           body: JSON.stringify({
-            password:newPassword
+            password: newPassword,
           }),
           headers: {
-            "Content-Type": "application/json",
-          API_KEY:
-          '382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b',
+            'Content-Type': 'application/json',
+            API_KEY: process.env.REACT_APP_API_KEY,
+          },
+        });
+        let res = await data.json();
+        if (res.status === 'success') {
+          document.getElementById('saveandcancel').style.display = 'none';
+          setload(false);
+          console.log('good');
+        } else {
+          console.log('error');
         }
       }
-      );
-      let res= await data.json();
-      if (res.status === "success") {
-        
-        document.getElementById("saveandcancel").style.display = "none";
-        setload(false)
-        console.log("good")
-      }
-      else{
-        console.log("error")
-      }
-    }  
-  }
+    }
   };
   const fileUpload = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    console.log(file)
-   
+    console.log(file);
+
     formData.append('image', file, file.name);
     const url = `https://api.connect-asl.site/api/users/image/${user.mobile}`;
     // send image as a file
@@ -295,20 +281,19 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
       method: 'PATCH',
       body: formData,
       headers: {
-        API_KEY:
-          '382395e75d624fb1478303451bc7543314ffffac6372c2aa9beb22f687e6e886b77b3ee84aeeb1a8aabad9647686d0baaa4d9a7c65ff6ef1ebc71fcde7bac14b',
+        API_KEY: process.env.REACT_APP_API_KEY,
       },
     });
-   let res = await data.json();
-    if (res.status === "success") {
-      console.log(res); 
+    let res = await data.json();
+    if (res.status === 'success') {
+      console.log(res);
       delete res.data._id;
-      localStorage.setItem("user", JSON.stringify(res.data));
-      user = res.data
-      setpicture(user.image)
-      document.getElementById("saveandcancel").style.display = "none";
+      localStorage.setItem('user', JSON.stringify(res.data));
+      user = res.data;
+      setpicture(user.image);
+      document.getElementById('saveandcancel').style.display = 'none';
     } else {
-      console.log("errr");
+      console.log('errr');
     }
     console.log(data);
   };
@@ -322,12 +307,12 @@ signInWithPhoneNumber(authentication,phoneNumber, appVerifier)
   if (tempuser === null) {
     return <Redirect to="/login" />;
   }
-if(verify){
-  return <Verification  phone={Phone} direct="updated" />
-}
+  if (verify) {
+    return <Verification phone={Phone} direct="updated" />;
+  }
   return (
     <react.Fragment>
-      {load? <Loader/>:null}
+      {load ? <Loader /> : null}
       <div id="sign-in-button"></div>
       <div className="setting">
         <div className="main-side">
@@ -372,8 +357,8 @@ if(verify){
                       />
                     </div>
                     {error.Name && (
-                <span className="text-danger">{error.Name}</span>
-              )}
+                      <span className="text-danger">{error.Name}</span>
+                    )}
                     <label htmlFor="username" className="form-label">
                       Phone Number
                     </label>
@@ -394,8 +379,8 @@ if(verify){
                       />
                     </div>
                     {error.Phone && (
-                <span className="text-danger">{error.Phone}</span>
-              )}
+                      <span className="text-danger">{error.Phone}</span>
+                    )}
                     <label htmlFor="username" className="form-label">
                       Gender
                     </label>
@@ -420,8 +405,8 @@ if(verify){
                       </select>
                     </div>
                     {error.Gender && (
-                <span className="text-danger">{error.Gender}</span>
-              )}
+                      <span className="text-danger">{error.Gender}</span>
+                    )}
                     <label
                       id="oldpass"
                       htmlFor="username"
@@ -436,7 +421,7 @@ if(verify){
                         onClick={editbutton}
                       ></i>
                       <input
-                      disabled
+                        disabled
                         id="inputpass"
                         className="inputsetting"
                         type="password"
@@ -445,8 +430,8 @@ if(verify){
                       />
                     </div>
                     {error.oldPassword && (
-                <span className="text-danger">{error.oldPassword}</span>
-              )}
+                      <span className="text-danger">{error.oldPassword}</span>
+                    )}
                     <div id="hidepass" className="hidepass">
                       <label htmlFor="username" className="form-label">
                         Enter New Password
@@ -460,8 +445,8 @@ if(verify){
                         />
                       </div>
                       {error.newPassword && (
-                <span className="text-danger">{error.newPassword}</span>
-              )}
+                        <span className="text-danger">{error.newPassword}</span>
+                      )}
                       <label htmlFor="username" className="form-label">
                         Confirm New Password
                       </label>
@@ -470,12 +455,14 @@ if(verify){
                           className="inputsetting"
                           type="password"
                           onChange={handleChange}
-                            name="confirmNewPassword"
+                          name="confirmNewPassword"
                         />
                       </div>
                       {error.confirmNewPassword && (
-                <span className="text-danger">{error.confirmNewPassword}</span>
-              )}
+                        <span className="text-danger">
+                          {error.confirmNewPassword}
+                        </span>
+                      )}
                     </div>
                     <div className="notification">
                       <span>Notification</span>
@@ -494,9 +481,10 @@ if(verify){
                     </button>
                   </div>
                 </form>
-               <button className="logout"onClick={logout}>Log Out</button>
+                <button className="logout" onClick={logout}>
+                  Log Out
+                </button>
               </div>
-              
             </div>
           </div>
         </div>

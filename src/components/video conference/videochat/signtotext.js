@@ -124,7 +124,9 @@ const SignToText = ({ textsign, signcheckCap, signToText, user, roomId }) => {
         playsInline
         style={{ display: 'none' }}
       ></video>
-      <canvas id="canvas" ref={canvasRef} className="canvas"></canvas>
+      <canvas
+         muted
+      id="canvas" ref={canvasRef} className="canvas"></canvas>
     </react.Fragment>
   );
 };

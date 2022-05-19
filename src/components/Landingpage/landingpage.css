@@ -172,6 +172,7 @@ width: 40%;
 .landing .about .aboutimg img{
     width: 100%;
     border-radius:35px ;
+    object-fit: cover;
 }
 
 .landing .work{
@@ -256,6 +257,7 @@ width: 40%;
     margin-bottom: 20px;
     min-width: 100%;
     min-height: 100%;
+    object-fit: cover;
 }
 .landing .ourteam  h3{
     margin-top: 10px;

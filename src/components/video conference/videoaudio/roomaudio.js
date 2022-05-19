@@ -478,7 +478,7 @@ const Roomaudio = (props) => {
                       <img src={user.image} alt='as' />
                       <video
                         ref={userVideoRef}
-                      
+                        muted
                         autoPlay
                         playsInline
                       ></video>

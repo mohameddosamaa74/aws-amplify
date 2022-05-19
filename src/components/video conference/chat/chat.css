@@ -364,3 +364,34 @@ right: 5px;
     border-bottom: 2px solid #333;
     color: #333;
   }
+
+
+  /* New Code */
+
+  .chat-side .sended-image{
+    object-fit: contain;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: 164px;
+}
+.chat-side .img-inbox{
+    width: 100% !important;
+    border-radius: 0px !important;
+    height: auto !important;
+    margin: 0px !important;
+}
+.chat-side .info-imagee{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+.chat-side .info-imagee i{
+    
+    z-index: 3;
+    position: absolute;
+    left: 238px;
+    top: 14px;
+}
+

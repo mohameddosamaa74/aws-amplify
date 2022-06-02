@@ -50,10 +50,10 @@ const BottomBar = ({
         sign.classList.toggle("showsign");
         settoSign(signcheck => !signcheck)
         if(toSign){
-          socket.emit("leave-sign-room",{roomId:roomId+"voicetosign"})}
+          socket.emit("leave-sign-room",{roomId:roomId,id:"voicetosign"})}
        
         else{
-          socket.emit("join-sign-room",{roomId:roomId+"voicetosign"})
+          socket.emit("join-sign-room",{roomId:roomId,id:"voicetosign"})
         } 
       };
       tool[1].onclick = () => {

@@ -15,7 +15,7 @@ const Setting = (props) => {
   if (tempuser === null) {
     history.push('/');
   }
-
+  console.log(user);
   const [formValue, setFormValue] = useState({
     Name: user.name,
     Phone: user.mobile,
@@ -42,10 +42,7 @@ const Setting = (props) => {
       authentication
     );
   };
-  const logout = () => {
-    window.localStorage.removeItem('user');
-    history.push('/');
-  };
+
   const validation = () => {
     const error = {};
     if (Name.trim() === '') {
@@ -397,11 +394,8 @@ const Setting = (props) => {
                         onChange={handleChange}
                         name="Gender"
                       >
-                        <option defaultValue hidden>
-                          Gender
-                        </option>
-                        <option>Male</option>
-                        <option>Female</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                       </select>
                     </div>
                     {error.Gender && (
@@ -481,9 +475,6 @@ const Setting = (props) => {
                     </button>
                   </div>
                 </form>
-                <button className="logout" onClick={logout}>
-                  Log Out
-                </button>
               </div>
             </div>
           </div>

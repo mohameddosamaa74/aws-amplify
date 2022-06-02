@@ -41,6 +41,7 @@
     "react-scroll-into-view": "^1.12.0",
     "react-scroll-to-bottom": "^4.2.0",
     "react-speech-recognition": "^3.9.0",
+    "react-timer-hook": "^3.0.5",
     "realistic-structured-clone": "^3.0.0",
     "simple-peer": "^9.11.0",
     "socket.io-client": "^4.5.0",

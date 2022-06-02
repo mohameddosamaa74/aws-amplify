@@ -79,6 +79,17 @@ margin: 14px 3px
     bottom: 5px;
     margin-left: 10px;
     cursor: pointer;
+    object-fit: cover;
+}
+
+.video-conference .main-side .navbar .grid-show #grid1 img{
+    width: 32px ;
+    margin: 0px ;
+    position: relative ;
+    bottom: 3px ;
+    left: 2px ;
+    object-fit: cover ;
+    cursor: pointer;
 }
  .video-conference .main-side .navbar .grid-show #grid6 i{
     font-size: 26px;
@@ -356,8 +367,9 @@ margin: 14px 3px
     color: white;
     width: fit-content;
     text-align: center;
+     width: 80px;
 }
- .video-conference .main-side .vi .vid-stream .opts .rec-time span{
+ .video-conference .main-side .vi .vid-stream .opts .rec-time #dottt{
     width: 7px;
     height: 7px;
     background: red;
@@ -827,34 +839,16 @@ width: 47px;
             top: 27px;
             right: -9px;
         }
-         .video-conference .main-side .navbar .grid-show #imgp{
-            height: 35px;
-            width: 35px;
-            border-radius: 50%;
-            position: relative;
-            bottom: 5px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-         .video-conference .main-side .navbar .grid-show #grid6 img{
-            width: 30px;
-            position: relative;
-            top: -4px;
+
+         .video-conference .main-side .navbar .grid-show #grid1 img{
+            width: 32px !important;
+            margin: 0px !important;
+            position: relative !important;
+            bottom: 3px !important;
+            left: 2px !important;
+            object-fit: cover !important;
             border-radius: 0px;
-            height: 27px;
-        }
-         .video-conference .main-side .navbar .grid-show #chhh{
-            width: 34px;
-            position: relative;
-            left: 5px;
-            top: -3px;
-            border-radius: 0px;
-        }
-         .video-conference .main-side .navbar .grid-show #grid6 img{
-            width: 30px;
-            position: relative;
-            top: -4px;
-            border-radius: 0px;
+
         }
         .fa-comment-dots{
             margin-left: 0px !important;

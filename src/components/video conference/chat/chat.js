@@ -89,11 +89,7 @@ const Chat = ({ roomId }) => {
   const deleteImg =()=>{
     setimageSended(true)
     setinputImage('')
-    console.log(inputImage)
-    console.log(imageSended)
   }
-  console.log(inputImage)
-  console.log(imageSended)
   return (
     <react.Fragment>
       <div className="chat-side" id="chat">

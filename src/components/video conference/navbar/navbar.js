@@ -1,5 +1,7 @@
 import react from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import logoutimg from '../../../img/icons8-logout-32.png'
 import "./navbar.css";
 const Navbar = () => {
   const opennav = () => {
@@ -8,6 +10,11 @@ const Navbar = () => {
       document.querySelector('.icon-opts .nav').classList.toggle('open');
       document.querySelector('.toggler').classList.toggle('fa-times');
     };
+  };
+  const history = useHistory();
+  const logout = () => {
+    window.localStorage.removeItem('user');
+    history.push('/');
   };
   return (
     <react.Fragment>
@@ -24,11 +31,11 @@ const Navbar = () => {
               <i className="fas fa-cog"></i>
             </li>
           </NavLink>
-          <NavLink to="/mainchat" className="linkk">
+          {/* <NavLink to="/mainchat" className="linkk">
             <li className="nav-item">
               <i className="fas fa-user-friends"></i>
             </li>
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/notifications" className="linkk">
             <li className="nav-item">
               <i className="fas fa-bell"></i>
@@ -39,7 +46,8 @@ const Navbar = () => {
               <i className="fas fa-calendar-alt"></i>
             </li>
           </NavLink>
-     
+            <li className="nav-item logimg">
+            <img src={logoutimg} alt="a" onClick={logout}/></li>
         </ul>
       </div>
     </react.Fragment>

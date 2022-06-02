@@ -82,6 +82,7 @@
     height: 120px;
     display: block;
     margin:32px auto;
+    object-fit: cover;
 }
 .setting .data .formdata{
     max-width: 442px;

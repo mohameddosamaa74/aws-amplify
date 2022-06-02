@@ -6,12 +6,24 @@ import { useSpeechRecognition } from "react-speech-recognition";
 const Signlang = ({ toSign, roomId, user, senderName, text }) => {
   let { transcript, listening } = useSpeechRecognition();
   const [newContent, setnewcontent] = useState("");
+  const [enablef1, setenablef1] = useState(false);
   const [isFinished, setisfinished] = useState(true);
+  useEffect(() => {
+    socket.on("enable-f1-to-all",()=>{
+      setenablef1(true)
+    })
+    socket.on("disable-f1-to-all",()=>{
+      setenablef1(false)
+    })
+    console.log(enablef1)
+    // eslint-disable-next-line
+  },[])
   useEffect(() => {
     setnewcontent(transcript);
     // eslint-disable-next-line
   }, [transcript]);
   useEffect(() => {
+    if(enablef1){
     if(newContent.length>0){
       console.log(newContent);
       console.log({ isFinished });
@@ -25,11 +37,12 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
         setisfinished(false);
         setnewcontent("");
       }
-    }
+    }}
     // eslint-disable-next-line
-  }, [listening]);
+  }, [listening,enablef1]);
   useEffect(() => {
-    
+    if(enablef1){
+      console.log("asdadadada")
       socket.on("receive-text", ({ data, name }) => {
         console.log({ data });
         if (text.current) {
@@ -69,8 +82,9 @@ const Signlang = ({ toSign, roomId, user, senderName, text }) => {
         }
         return window.btoa(binary);
       };
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [enablef1]);
   return (
     <react.Fragment>
       <img id="stream_asl_v" alt="ss" src={signpic} className="signvid" />

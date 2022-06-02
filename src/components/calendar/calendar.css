@@ -15,7 +15,7 @@
     height:auto;
 }
 .calendar .cal{
-    margin:100px auto 0px;
+    margin: 100px auto;
 }
 .react-calendar {
     width: 416px;
@@ -127,5 +127,10 @@
         background-color: #1f232c;
         margin: 61px 15px 15px 15px !important;  
         height: 100%;
+        overflow: auto;
       }
+      .calendar .cal{
+        margin: 100px auto;
+        width: 100%;
+    }
 }

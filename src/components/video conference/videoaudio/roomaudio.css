@@ -59,6 +59,14 @@ font-weight: bold;
 cursor: pointer;
 
 }
+.roomaudio  .video-conference .main-side .navbar .grid-show img{
+    width: 32px;
+    margin: 0px;
+    position: relative;
+    bottom: 3px;
+    left: 2px;
+    object-fit: cover;
+}
 .roomaudio  .video-conference .main-side .navbar .grid-show #grid4 i{
     font-size: 26px;
     position: relative;
@@ -68,15 +76,7 @@ cursor: pointer;
     display:inline-block;
 margin: 14px 3px
 }
-.roomaudio  .video-conference .main-side .navbar .grid-show #imgp{
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    position: relative;
-    bottom: 5px;
-    margin-left: 10px;
-    cursor: pointer;
-}
+
 .roomaudio  .video-conference .main-side .navbar .grid-show #grid6 i{
     font-size: 26px;
     color: white;
@@ -364,8 +364,9 @@ margin: 14px 3px
     color: white;
     width: fit-content;
     text-align: center;
+    width: 80px;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .rec-time span{
+.roomaudio  .video-conference .main-side .vi .vid-stream .opts .rec-time #dottt{
     width: 7px;
     height: 7px;
     background: red;
@@ -419,6 +420,7 @@ position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    object-fit: cover;
 }
 .roomaudio  .video-conference .main-side .vi .vid-stream .vids .signlang .signvid{
     width: 100%;
@@ -783,6 +785,7 @@ width: 47px;
             bottom: 5px;
             margin-left: 10px;
             cursor: pointer;
+            object-fit: cover;
         }
         .roomaudio  .video-conference .main-side .navbar .grid-show #grid6 img{
             width: 30px;

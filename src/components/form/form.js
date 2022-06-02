@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect,Link } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './form.css';
@@ -332,7 +332,7 @@ class Form extends Component {
                   REGISTER
                 </a>
               </p>
-              {/* <Link to="/forget">forget your password..?</Link> */}
+              <Link to="/forget">forget your password..?</Link>
             </form>
           </div>
 

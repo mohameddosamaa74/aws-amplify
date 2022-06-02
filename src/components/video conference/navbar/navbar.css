@@ -24,7 +24,46 @@
     border-radius: 0px 30px 30px 0px;
     padding: 6px !important ;
 }
+
+.icon-opts{
+    display: flex;
+    height: 554px;
+    padding-top: 30px;
+    z-index: 8888;
+}
+.icon-opts ul{
+    display: flex;
+    justify-content: space-evenly !important;
+}
+.icon-opts ul a li{
+    margin: 0px !important;
+}
+ .icon-opts ul i {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.icon-opts ul li.logimg{
+    text-align: center;
+    bottom: 84px;
+    position: absolute;
+} 
+.icon-opts ul .logimg img{
+    cursor: pointer;
+    margin-left: 12px;
+}
 @media only screen and (max-width: 800px) {
+    .icon-opts ul li.logimg{
+        text-align: center;
+        bottom: 13px;
+        position: absolute;
+        right: -31px;
+        top: -25px;
+    }
+    .icon-opts ul li.logimg img{
+        width: 28px;
+    }
     .toggler{
         display: block !important; 
         opacity: 1 !important;
@@ -70,24 +109,4 @@
         border-radius: 7px;
         padding: 0px !important;
     }
-}
-
-.icon-opts{
-    display: flex;
-    height: 554px;
-    padding-top: 30px;
-    z-index: 8888;
-}
-.icon-opts ul{
-    display: flex;
-    justify-content: space-evenly !important;
-}
-.icon-opts ul a li{
-    margin: 0px !important;
-}
- .icon-opts ul i {
-    font-size: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 }

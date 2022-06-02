@@ -5,6 +5,7 @@ import verify from '../../img/vecteezy_identity-biometric-verification_ 1.png';
 import authentication from '../firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import Loader from '../loader/loader';
+import NewPassword from '../forgetpass/password';
 // import firebase from "../firebase";
 class Verification extends Component {
   state = {
@@ -102,6 +103,11 @@ class Verification extends Component {
       });
     }
   };
+  forget = async () => {
+      this.setState({
+        very: 'updatedpass',
+      });
+  };
   handlesubotp = async (e) => {
     e.preventDefault();
     // const error = this.validsignup();
@@ -124,6 +130,9 @@ class Verification extends Component {
           await this.signup();
         } else if (this.state.direct === 'updated') {
           await this.update();
+        }
+        else if (this.state.direct === 'forget') {
+          await this.forget();
         }
         // ...
       })
@@ -153,6 +162,11 @@ class Verification extends Component {
         <react.Fragment>
           <Redirect to="/home" />
         </react.Fragment>
+      );
+    }
+    if (this.state.very === 'updatedpass') {
+      return (
+          <NewPassword Phone={this.state.mobile}/>
       );
     }
     return (

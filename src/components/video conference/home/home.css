@@ -92,6 +92,7 @@ i{
     width: 120px;
     margin-top: 10%;
     margin-bottom: 10%;
+    object-fit: cover;
 }
 .history{
     display: flex;

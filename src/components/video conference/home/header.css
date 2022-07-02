@@ -2,7 +2,6 @@
 i{
     cursor: pointer;
 }
-
 .head .navbar{
     background-color: rgba(24,31,39,255);
     padding: 6px !important;
@@ -10,24 +9,16 @@ i{
     display: flex;
     justify-content: space-between;
 }
-.head  ul{
-    list-style: none;
-}
 .head .logandtit{
     display: flex;
     justify-content: space-between;
     float: left;
 }
-.head  ul li{
-    display:inline-block;
-        margin: 25px 3px
-}
-
 .head  .navbar .logo{
     position: relative;
     text-align: center;
     width:107px;
-
+    cursor: pointer;
 }
 .head  .navbar .logo img{
     width: 43px;
@@ -39,32 +30,6 @@ i{
     font-weight: bold;
     cursor: pointer;
 }
-.head  .navbar .title{
-    text-align: center;
-    display: flex;
-
-    
-}
-.head  .navbar .title .ser{position: relative;}
-.head  .navbar .title .ser i{
-position: absolute;
-color: #676771;
-bottom: 23px;
-right: 9px;
-font-size: 16px;
-}
-.head  .navbar input{
-    background-color: #272530;
-    border: none !important;
-    border-radius: 10px;
-    color: white !important;
-    width: 100%;
-}
-.head  .navbar input::placeholder{
-     color: #676771 !important;
-     font-size: 16px;
-}
-
 .head .navbar  img{
     width: 37px;
     height: 37px;
@@ -76,33 +41,6 @@ font-size: 16px;
     border-bottom: 2px solid #d1d5d6;
     font-size: 16px;
 }
-.head .navbar .fa-phone-alt{
-    font-size: 23px;
-    background-color: #f4593e;
-    color: #f8fff3;
-    padding: 7px;
-    border-radius: 6px;
-    margin: auto 5px;
-    height: fit-content;
-    margin-left: 12px;
-}
-
-.head .navbar .fa-video{
-    background-color: #716ffe;
-    color: #f8fff3;
-    padding: 7px;
-    border-radius: 6px;
-    margin: auto 5px;
-    height: fit-content;
-       font-size: 23px;
-    }
-    .head .navbar .grid-show{
-        margin-right: 22px;
-        float: right;
-
-    }
-
-
 .head  .vi .vid-stream .prof{
     padding: 15px;
     position: relative;
@@ -134,8 +72,7 @@ font-size: 16px;
 }
 @media only screen and (max-width: 800px) {
     .head  .navbar .title .ser i{
-        bottom: 27px;
-    
+        bottom: 24px;
         }
     .head{
   
@@ -150,27 +87,6 @@ font-size: 16px;
         width: 100%;
         display: flex;
     }
-    .head .navbar input{
-        width: 100%;
-    }
-    .head .navbar .fa-phone-alt{
-        font-size: 26px;
-    
-        color: #f8fff3;
-        padding: 7px;
-        border-radius: 6px;
-        height: fit-content;
-        margin: 11px 5px !important;
-    }
-    
-    .head .navbar .fa-video{
-        font-size: 26px;
-        padding: 7px;
-        border-radius: 6px;
-        color: #f8fff3;
-        height: fit-content;
-        margin: 11px 5px !important;
-    }
     .head  .vi .vid-stream {
         display: flex;
         flex-direction: column;
@@ -180,28 +96,15 @@ font-size: 16px;
         margin: 61px 15px 15px 15px !important;  
       }}
       @media only screen and (max-width: 600px) {
-        .head .navbar input{
-            width: 100%;
-        }
         .head  .navbar .logo{margin-left: 5px;}
-        .head .navbar .grid-show {
-            margin: 0 auto;
-        }
       }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .head .navbar input{
-        width: 100%;
-        
-    }
     .head  .navbar .logo{margin-right: 5px; margin-left: 0px;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media (min-width: 800px  )  and (min-width: 768px  ) {
-    .head .navbar input{
-        width: 395px;
-    }
     .head  .navbar .logo{margin-right: 0px;margin-left: -22px;}
 }
 
@@ -214,8 +117,5 @@ font-size: 16px;
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .head .navbar input{
-        width: 600px;
-    }
     .head  .navbar .logo{margin-right: 60px;margin-left: -22px;}
 }

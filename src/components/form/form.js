@@ -1,12 +1,10 @@
 import react, { Component } from 'react';
-import { Redirect,Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import './form.css';
+import { Api } from '../api/api';
 import Verification from '../verification/verification';
-// import firebase from "../firebase";
-// import "firebase/compat/auth"
-// import "firebase/compat/firestore"
 import authentication from '../firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import logo from '../../img/log.png';
@@ -66,13 +64,10 @@ class Form extends Component {
     if (error) return;
     this.setState({ loading: true });
     //back end
-    let data = await fetch(
-      `https://api.connect-asl.site/api/users/${this.state.mobile}`,
-      {
-        headers: this.header,
-        method: 'GET',
-      }
-    );
+    let data = await fetch(`${Api}/${this.state.mobile}`, {
+      headers: this.header,
+      method: 'GET',
+    });
     let res = await data.json();
 
     console.log(res);
@@ -136,7 +131,7 @@ class Form extends Component {
     if (error) return;
     //back end
     this.setState({ loading: true });
-    const url = 'https://api.connect-asl.site/api/users/login';
+    const url = `${Api}/login`;
     const data = await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -276,10 +271,6 @@ class Form extends Component {
               {this.state.error.gender && (
                 <span className="text-danger">{this.state.error.gender}</span>
               )}
-              {/* <p className="agree">By creating an account you agree to our </p>
-              <a href="https://www.w3schools.com/colors/colors_gradient.asp">
-                tems of use and privacy policy
-              </a> */}
               <button type="submit" className="signup">
                 REGISTER
               </button>
@@ -296,7 +287,6 @@ class Form extends Component {
             <form onSubmit={this.handlesublogin}>
               <img src={logo} alt="logo" />
               <h1 className="LOGTITLE">LOGIN</h1>
-              {/* <p className="text-center">enter your accout details </p> */}
               <div className="inputcontainer">
                 <i className="fas fa-mobile-alt"></i>
                 <input

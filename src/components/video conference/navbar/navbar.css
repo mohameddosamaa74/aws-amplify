@@ -44,25 +44,40 @@
     font-weight: bold;
     cursor: pointer;
 }
-.icon-opts ul li.logimg{
+.icon-opts .logimg{
     text-align: center;
-    bottom: 84px;
     position: absolute;
+    margin-left: 10px;
+    bottom: 149px;
 } 
-.icon-opts ul .logimg img{
+.icon-opts .logimg span{
+    color: white;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    position: absolute;
+    left: 0;
+    top: -21px;
+}
+.icon-opts .logimg img{
     cursor: pointer;
-    margin-left: 12px;
+}
+.icon-opts .logimg:hover span{
+    opacity: 1 !important;
 }
 @media only screen and (max-width: 800px) {
-    .icon-opts ul li.logimg{
-        text-align: center;
-        bottom: 13px;
+    .icon-opts .logimg{
+        right: 5px;
         position: absolute;
-        right: -31px;
-        top: -25px;
+        top: 103px;
+       
     }
-    .icon-opts ul li.logimg img{
-        width: 28px;
+    .icon-opts .logimg span{
+        color: white;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        position: absolute;
+        left: -10px;
+        top: -21px;
     }
     .toggler{
         display: block !important; 

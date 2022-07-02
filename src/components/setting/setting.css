@@ -16,14 +16,6 @@
     text-align: center;
     justify-content: center;
 }
-/* .setting .proimg input[type="file"]{
-    width: 33px;
-    height: 33px;
-    position: absolute;
-    background-color: chocolate;
-    color: brown;
-    padding: 0px;
-} */
 .setting .proimg input[type="file"]::after{
     width: 33px;
     height: 33px;
@@ -54,6 +46,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+.setting .data img.logoutimg{
+    object-fit: cover;
+    width: 50px;
+    cursor: pointer;
 }
 .setting .data .proimg i{
     color: white;
@@ -184,10 +181,6 @@
     
     background-color: #181f27;
   }
-
-  /* .setting .data .formdata .notification input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  } */
   .setting .data .formdata .notification input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);

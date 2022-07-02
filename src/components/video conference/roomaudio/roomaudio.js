@@ -3,22 +3,21 @@ import react from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import Peer from 'simple-peer';
 import socket from '../socket';
-import './room.css';
+import './roomaudio.css';
 import Navbar from '../navbar/navbar';
 import Chat from '../chat/chat';
 import logo from '../../../img/MicrosoftTeams-image4) 1.png';
 import groupicon from '../../../img/group-chatt 1.png';
-import BottomBar from './BottomBar';
-import VideoCard from './vid';
+import BottomBar from './bottombar';
+import VideoCard from './audio';
 import { Redirect } from 'react-router';
-import Loader from '../../loader/loader'
+import Loader from '../../loader/loader';
+import grid1 from '../../../img/icons8-grid-50.png';
+import { useStopwatch } from 'react-timer-hook';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
-import Signlang from './signlanguage';
-import SignToText from './signtotext';
-import grid1 from '../../../img/icons8-grid-50.png';
-import { useStopwatch } from 'react-timer-hook';
+import Signlang from '../roomvideo/signlanguage';
 const Copy = () => {
   var Url = document.getElementById('paste-box');
   Url.value = window.location.href;
@@ -27,36 +26,29 @@ const Copy = () => {
   document.execCommand('Copy');
 };
 const grid = () => {
-  console.log('grid');
   const grid6 = document.getElementById('grid6');
   const grid4 = document.getElementById('grid4');
-  const grid1 =document.getElementById('grid1');
-  // const vids = document.querySelector('.vids');
-  const viditem = document.querySelectorAll('.vid-item');
-  // const videoconference = document.querySelector('.video-conference');
-  // if(videoconference.style.width=="100%"){
-    for (let i = 0; i < viditem.length; i++) {
-      grid6.onclick = () => {
-        viditem[i].style.width = 'calc(100% / 4)';
-        viditem[i].style.height = 'auto';
-      };
-  
-      grid4.onclick = () => {
-        viditem[i].style.width = 'calc(100% / 3)';
-        viditem[i].style.height = 'auto';
-      };
-      grid1.onclick = () => {
-        viditem[i].style.width = '100%';
-        viditem[i].style.height = '100%';
-        // vids.style.padding = '0% 0%';
-        // viditem[i].style.margin = '0% 3%';
-      };
-    }
-  // }
-  // else{
+  const grid1 = document.getElementById('grid1');
+  const vids = document.querySelector('.vids');
+  const viditem = document.getElementsByClassName('vid-item');
+  for (let i = 0; i < viditem.length; i++) {
+    grid6.onclick = () => {
+      viditem[i].style.width = 'calc(100%/4)';
+      vids.style.padding = '0% 19%';
+      viditem[i].style.margin = '0% 0%';
+    };
 
-  // }
-
+    grid4.onclick = () => {
+      viditem[i].style.width = 'calc(100%/3.1)';
+      vids.style.padding = '0% 0%';
+      viditem[i].style.margin = '0% 0%';
+    };
+    grid1.onclick = () => {
+      viditem[i].style.width = 'calc(100%/1.7)';
+      vids.style.padding = '0% 0%';
+      viditem[i].style.margin = '0% 3%';
+    };
+  }
 };
 const openchat = () => {
   const icon = document.querySelector('.fa-comment-dots');
@@ -106,38 +98,34 @@ const close = () => {
   pop.classList.remove('showop');
   pop.classList.add('hideop');
 };
-const Roomvideo = (props) => {
+const Roomaudio = (props) => {
   const [peers, setPeers] = useState([]);
   const [toSign, settoSign] = useState(false);
   const [loading, setloading] = useState(false);
-  const [signToText, setsignToText] = useState(false);
-  const [userVideoAudio, setUserVideoAudio] = useState({localUser: { video: true, audio: true }});
-  const [screenShare, setScreenShare] = useState(false);
+  const [userVideoAudio, setUserVideoAudio] = useState({
+    localUser: { audio: true },
+  });
   const [screenRecod, setScreenRecor] = useState(false);
   const peersRef = useRef([]);
   const userVideoRef = useRef();
-  const screenTrackRef = useRef();
   const userStream = useRef();
-  const roomId = props.match.params.roomvideoId;
+  const roomId = props.match.params.roomaudioId;
   const tempuser = localStorage.getItem('user');
   const user = JSON.parse(tempuser);
   const audio = userVideoAudio['localUser'].audio;
-  const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder({ screen: true });
-  let {transcript,listening,
-// browserSupportsSpeechRecognition
-} = useSpeechRecognition();
-
+  const { startRecording, stopRecording, mediaBlobUrl } = useReactMediaRecorder(
+    { screen: true }
+  );
+  let {
+    listening,
+    // browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+  const { seconds, minutes, hours } = useStopwatch({ autoStart: true });
   let text = useRef();
   let senderName = useRef();
-  let textsign=useRef()
   // if (!browserSupportsSpeechRecognition) {
   //   return (<span>Browser doesn't support speech recognition.</span>)
   // }
-  const {
-    seconds,
-    minutes,
-    hours,
-  } = useStopwatch({ autoStart: true });
   useEffect(() => {
     // Get Video Devices
     // navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -146,50 +134,54 @@ const Roomvideo = (props) => {
     // });
 
     // Set Back Button Event
-    navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia || 
-      navigator.mediaDevices.webKitGetUserMedia || navigator.mediaDevices.moxGetUserMedia ||
-       navigator.mediaDevices.mozGetUserMedia || navigator.mediaDevices.msGetUserMedia);
+
     window.addEventListener('popstate', goToBack);
     if (tempuser === null) {
-      return <Redirect to='/login' />;
+      return <Redirect to="/" />;
     }
     // setloading(true);
     // Connect Camera & Mic
-    setloading(true)
-   
+    setloading(true);
+    if (!navigator.mediaDevices) {
+      setloading(false);
+      alert('Sorry, getUserMedia is not supported');
+      return;
+    }
     navigator.mediaDevices
-      .getUserMedia({ video: true , audio: true })
-      .then((stream) => 
-      {
-        setloading(false)
+      .getUserMedia({ video: false, audio: true })
+      .then((stream) => {
+        setloading(false);
         userVideoRef.current.srcObject = stream;
         userStream.current = stream;
         socket.emit('BE-join-room', {
           roomId,
           user,
-          video: true,
+          video: false,
           audio: true,
+          typeMeet: 'audio',
         });
 
         socket.on('FE-user-join', ({ userId, info }) => {
           // all users
-          let { user: newUser, video, audio } = info;
+          let { user: newUser, audio } = info;
+          console.log(newUser);
 
           const peer = createPeer(userId, socket.id, stream);
           peer.userName = newUser.name;
           peer.peerID = userId;
-
+          peer.image = newUser.image;
           peersRef.current.push({
             peerID: userId,
             peer,
             userName: newUser.name,
             audio,
+            image: newUser.image,
           });
 
           setUserVideoAudio((preList) => {
             return {
               ...preList,
-              [peer.userName]: { video, audio },
+              [peer.userName]: { audio },
             };
           });
           setPeers((users) => {
@@ -197,7 +189,7 @@ const Roomvideo = (props) => {
           });
         });
         socket.on('FE-receive-call', ({ signal, from, info }) => {
-          let { user: newUser, video, audio } = info;
+          let { user: newUser, audio } = info;
           const peerIdx = findPeer(from);
 
           if (!peerIdx) {
@@ -205,12 +197,14 @@ const Roomvideo = (props) => {
 
             peer.userName = newUser.name;
             peer.peerID = from;
+            peer.image = newUser.image;
 
             peersRef.current.push({
               peerID: from,
               peer,
               userName: newUser.name,
               audio,
+              image: newUser.image,
             });
 
             setPeers((users) => {
@@ -219,7 +213,7 @@ const Roomvideo = (props) => {
             setUserVideoAudio((preList) => {
               return {
                 ...preList,
-                [peer.userName]: { video, audio },
+                [peer.userName]: { audio },
               };
             });
           }
@@ -237,28 +231,20 @@ const Roomvideo = (props) => {
             peersRef.current = peersRef.current.filter(
               ({ peerID }) => peerID !== userId
             );
-        
-setPeers((users) => {
-  users = users.filter((user) => user.peerID !== userId);
-  return [...users];
+            setPeers((users) => {
+              users = users.filter((user) => user.peerID !== userId);
+              return [...users];
             });
           }
         });
-      }).catch((error)=>{
-        setloading(false)
-        // alert(error)
-        alert("Sorry, getUserMedia is not supported ");
       });
 
     socket.on('FE-toggle-camera', ({ userId, switchTarget }) => {
       const peerIdx = findPeer(userId);
       setUserVideoAudio((preList) => {
-        let video = preList[peerIdx.userName].video;
         let audio = preList[peerIdx.userName].audio;
 
-        if (switchTarget === 'video') {
-          video = !video;
-        } else {
+        if (switchTarget === 'audio') {
           audio = !audio;
           peerIdx.audio = audio;
           // audio ? speechRecognition.start() : speechRecognition.stop();
@@ -267,7 +253,7 @@ setPeers((users) => {
 
         return {
           ...preList,
-          [peerIdx.userName]: { video, audio },
+          [peerIdx.userName]: { audio },
         };
       });
     });
@@ -277,17 +263,14 @@ setPeers((users) => {
     };
     // eslint-disable-next-line
   }, []);
-  //voice to sign
+
   useEffect(() => {
     if (audio) {
-      console.log('start listening');
       SpeechRecognition.startListening({
         language: 'en-US',
         continuous: false,
       });
-      console.log(transcript);
     } else {
-      console.log('stop listening');
       SpeechRecognition.stopListening();
     }
     // eslint-disable-next-line
@@ -298,6 +281,7 @@ setPeers((users) => {
       trickle: false,
       stream,
     });
+
     peer.on('signal', (signal) => {
       socket.emit('BE-call-user', {
         userToCall: userId,
@@ -311,6 +295,7 @@ setPeers((users) => {
 
     return peer;
   }
+
   function addPeer(incomingSignal, callerId, stream) {
     const peer = new Peer({
       initiator: false,
@@ -334,58 +319,57 @@ setPeers((users) => {
   function findPeer(id) {
     return peersRef.current.find((p) => p.peerID === id);
   }
+
   function createUserVideo(peer, index, arr) {
-    // console.log(userVideoAudio[peer.userName])
     return (
       <div
         className={`width-peer${peers.length > 8 ? '' : peers.length} vid-item`}
-        onClick={expandScreen}
         key={index}
       >
-        <i className='fas fa-expand'></i>
         <VideoCard key={index} peer={peer} number={arr.length} />
-        
-        <div className='icon'>
+        <div className="icon">
           {findPeer(peer.peerID).audio ? (
-            <i className='fas fa-microphone'></i>
+            <i className="fas fa-microphone"></i>
           ) : (
-            <i className='fas fa-microphone-slash'></i>
+            <i className="fas fa-microphone-slash"></i>
           )}
         </div>
-        <span className='name'>{peer.userName}</span>
+        <span className="name">{peer.userName}</span>
       </div>
+    );
+  }
+  function createUseroption(peer, index, arr) {
+    console.log(peer);
+
+    return (
+      <option disabled key={index}>
+        {peer.userName}
+      </option>
     );
   }
   // BackButton
   const goToBack = (e) => {
     e.preventDefault();
-    // socket.emit('BE-leave-room', { roomId });
+    socket.emit('BE-leave-room', { roomId });
     window.location.href = '/home';
   };
   const toggleCameraAudio = (e) => {
     const target = e.target.getAttribute('data-switch');
     setUserVideoAudio((preList) => {
-      console.log(userVideoRef)
-      let videoSwitch = preList['localUser'].video;
       let audioSwitch = preList['localUser'].audio;
-
-      if (target === 'video') {
-        const userVideoTrack =
-          userVideoRef.current.srcObject.getVideoTracks()[0];
-        videoSwitch = !videoSwitch;
-        userVideoTrack.enabled = videoSwitch;
-      } else {
-        
+      if (target === 'audio') {
         const userAudioTrack =
           userVideoRef.current.srcObject.getAudioTracks()[0];
         audioSwitch = !audioSwitch;
         userAudioTrack.enabled = audioSwitch;
+
         // audioSwitch ? speechRecognition.start() : speechRecognition.stop();
+        console.log(audioSwitch);
       }
 
       return {
         ...preList,
-        localUser: { video: videoSwitch, audio: audioSwitch },
+        localUser: { audio: audioSwitch },
       };
     });
 
@@ -393,60 +377,6 @@ setPeers((users) => {
       roomId,
       switchTarget: target,
     });
-  };
-  const clickScreenSharing = () => {
-    if (!screenShare) {
-      navigator.mediaDevices
-        .getDisplayMedia({ cursor: true })
-        .then((stream) => {
-          const screenTrack = stream.getTracks()[0];
-
-          peersRef.current.forEach(({ peer }) => {
-            // replaceTrack (oldTrack, newTrack, oldStream);
-            peer.replaceTrack(
-              peer.streams[0]
-                .getTracks()
-                .find((track) => track.kind === 'video'),
-              screenTrack,
-              userStream.current
-            );
-          });
-          // Listen click end
-          screenTrack.onended = () => {
-            peersRef.current.forEach(({ peer }) => {
-              peer.replaceTrack(
-                screenTrack,
-                peer.streams[0]
-                  .getTracks()
-                  .find((track) => track.kind === 'video'),
-                userStream.current
-              );
-            });
-            userVideoRef.current.srcObject = userStream.current;
-            setScreenShare(false);
-          };
-          userVideoRef.current.srcObject = stream;
-          screenTrackRef.current = screenTrack;
-          setScreenShare(true);
-        });
-    } else {
-      screenTrackRef.current.onended();
-    }
-  };
-    const expandScreen = (e) => {
-    const elem = e.target;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
   };
   const toggleRecording = () => {
     setScreenRecor((checkrec) => !checkrec);
@@ -470,120 +400,123 @@ setPeers((users) => {
     setScreenRecor(false);
   }, [mediaBlobUrl]);
   if (tempuser === null) {
-    return <Redirect to='/login' />;
+    return <Redirect to="/" />;
   }
   return (
     <react.Fragment>
       {loading ? <Loader /> : null}
-      <div className='roomvideo'>
-        <div className='video-conference'>
-          <div className='main-side' id='main'>
-            <div className='screen-record'>
-              <div id='pop' className='popup-wrapper2'>
-                <button className='close-btn2' onClick={close}>
-                  <i className='fas fa-times'></i>
+      <div className="roomaudio">
+        <div className="video-conference">
+          <div className="main-side" id="main">
+            <div className="screen-record">
+              <div id="pop" className="popup-wrapper2">
+                <button className="close-btn2" onClick={close}>
+                  <i className="fas fa-times"></i>
                 </button>
                 <video src={mediaBlobUrl} controls autoPlay />
               </div>
             </div>
-            <div className='navbar'>
-              <div className='logo'>
-                <img src={logo} alt='logo' />
+            <div className="navbar">
+              <div className="logo">
+                <img src={logo} alt="logo" />
               </div>
-              <div className='title'>
-                <h4>Video Conference</h4>
+              <div className="title">
+                <h4>{roomId.split('+')[1] || 'Unnamed'}</h4>
               </div>
-              <div className='grid-show'>
+              <div className="grid-show">
                 <ul>
-                <li id='grid1' onClick={grid}>
-                 <img src={grid1} alt="f"/>
+                  <li id="grid1" onClick={grid}>
+                    <img src={grid1} alt="f" />
                   </li>
-                  <li id='grid6' onClick={grid}>
-                     <i className='fas fa-th'></i>
+                  <li id="grid6" onClick={grid}>
+                    <i className="fas fa-th"></i>
                   </li>
-                  <li id='grid4' onClick={grid}>
-                    <i className='fas fa-th-large'></i>
-                  </li>
-                  <li>
-                    <i className='fas fa-comment-dots' onClick={openchat}></i>
+                  <li id="grid4" onClick={grid}>
+                    <i className="fas fa-th-large"></i>
                   </li>
                   <li>
-                    <img id='imgp' src={user.image} alt='a' />
+                    <i className="fas fa-comment-dots" onClick={openchat}></i>
+                  </li>
+                  <li>
+                    <img id="imgpa" src={user.image} alt="a" />
                   </li>
                 </ul>
               </div>
             </div>
-            <div className='vi'>
+            <div className="vi">
               <Navbar />
-              <div className='vid-stream'>
-                <div className='opts'>
-                  <img src={groupicon} alt='group' />
-                  <select className='nump'>
-                    <option>{peers.length + 1}</option>
+              <div className="vid-stream">
+                <div className="opts">
+                  <img src={groupicon} alt="group" />
+                  <select className="nump">
+                    <option defaultValue hidden>
+                      {peers.length + 1}
+                    </option>
+                    <option disabled>{user.name}</option>
+                    {peers &&
+                      peers.map((peer, index, arr) => {
+                        console.log();
+                        return createUseroption(peer, index, arr);
+                      })}
                   </select>
-                  <div className='invite'>
+                  <div className="invite">
                     <i
-                      className='fas fa-users popup-open'
+                      className="fas fa-users popup-open"
                       onClick={openpopup}
                     ></i>
                     Invite a participant
-                    <div className='popup-wrapper'>
-                      <div className='popup'>
-                        <button className='close-btn'>
-                          <i className='fas fa-times'></i>
+                    <div className="popup-wrapper">
+                      <div className="popup">
+                        <button className="close-btn">
+                          <i className="fas fa-times"></i>
                         </button>
-                        <div className='copy'>
+                        <div className="copy">
                           <button onClick={Copy}>Copy Link</button>
-                          <input type='text' id='paste-box' />
+                          <input type="text" id="paste-box" />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className='rec-time'>
-                    <span id='dottt'></span><span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+                  <div className="rec-time">
+                    <span id="dottt"></span>
+                    <span>{hours}</span>:<span>{minutes}</span>:
+                    <span>{seconds}</span>
                   </div>
                 </div>
-                <div className='vids'>
-                  <div className='stream vid-item signlang'>
-                   <Signlang toSign={toSign}
-                   roomId={roomId}
-                   user={user}
-                  // settextcaption={(textcaption)=>settextcaption(textcaption)}
-                  text={text}
-                  senderName={senderName}
-                  />
-                    <span className='name' ref={senderName}></span>
+                <div className="vids">
+                  <div className="stream vid-item signlang">
+                    <Signlang
+                      toSign={toSign}
+                      roomId={roomId}
+                      user={user}
+                      // settextcaption={(textcaption)=>settextcaption(textcaption)}
+                      text={text}
+                      senderName={senderName}
+                    />
+                    <span className="name" ref={senderName}></span>
                   </div>
-                  <div className='vid-item'>
+                  <div className="vid-item">
                     <div
                       className={`width-peer${
                         peers.length > 8 ? '' : peers.length
                       }`}
                     >
-                      <i className='fas fa-expand' />
+                      <img src={user.image} alt="as" />
                       <video
-                        onClick={expandScreen}
                         ref={userVideoRef}
                         muted
                         autoPlay
                         playsInline
                       ></video>
-                      <SignToText
-                      roomId={roomId}
-                       textsign={textsign}
-                       signToText={signToText}
-                       audio={audio}
-                       user={user}
-                       />
                     </div>
-                    <div className='icon'>
+                    <div className="icon">
                       {userVideoAudio['localUser'].audio ? (
-                        <i className='fas fa-microphone'></i>
+                        <i className="fas fa-microphone"></i>
                       ) : (
-                        <i className='fas fa-microphone-slash'></i>
+                        <i className="fas fa-microphone-slash"></i>
                       )}
                     </div>
-                    <span className='name'>{user.name}</span>
+                    <span className="name">{user.name}</span>
                   </div>
                   {peers &&
                     peers.map((peer, index, arr) => {
@@ -593,30 +526,25 @@ setPeers((users) => {
               </div>
             </div>
             <BottomBar
-              clickScreenSharing={clickScreenSharing}
               // clickChat={clickChat}
               // clickCameraDevice={clickCameraDevice}
               goToBack={goToBack}
               toggleCameraAudio={toggleCameraAudio}
               userVideoAudio={userVideoAudio['localUser']}
-              screenShare={screenShare}
               text={text}
               toSign={toSign}
-              signToText={signToText}
-              setsignToText={setsignToText}
               settoSign={settoSign}
               senderName={senderName}
               toggleRecording={toggleRecording}
               screenRecod={screenRecod}
-              textsign={textsign}
               roomId={roomId}
             />
           </div>
-          <Chat roomId={roomId}/>
+          <Chat roomId={roomId} />
         </div>
       </div>
     </react.Fragment>
   );
 };
 
-export default Roomvideo;
+export default Roomaudio;

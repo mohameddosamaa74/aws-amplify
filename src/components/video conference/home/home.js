@@ -1,42 +1,34 @@
-import react from "react";
-import React from "react";
-import "./home.css";
-import Navbar from "../navbar/navbar";
+import react from 'react';
+import React from 'react';
+import './home.css';
+import Navbar from '../navbar/navbar';
 // import { v4 as uuid } from "uuid";
-import "../navbar/navbar.css";
-import { Redirect } from "react-router";
-import Chathome from "./chathome";
-import Dailymeeting from "./history";
-import Header from "./header.js";
-const openchat = () => {
-  const icon = document.querySelector(".dots");
-  icon.onclick = () => {
-    document.querySelector(".lst").classList.toggle("open");
-    document.querySelector(".prof").classList.toggle("openhome");
-    document.querySelector(".dots").classList.toggle("act");
-  };
-};
+import '../navbar/navbar.css';
+import { Redirect } from 'react-router';
+import Dailymeeting from './history';
+import Header from './header.js';
+import Calls from './calls';
+// eslint-disable-next-line
 const Home = (props) => {
-  const tempuser = localStorage.getItem("user");
+  const tempuser = localStorage.getItem('user');
   // console.log(tempuser)
   if (tempuser === null) {
     return <Redirect to="/login" />;
   }
 
-  const user= JSON.parse(tempuser);
+  const user = JSON.parse(tempuser);
   return (
     <react.Fragment>
       <div className="home">
-        <div className="main-side" id="main">
+        <div className="main-side">
           <Header r={props} />
           <div className="vi">
             <Navbar />
-            <i className="fas fa-comment-dots dots" onClick={openchat}></i>
             <div className="vid-stream">
               <div className="row">
                 <div className="col-lg-4">
                   <div className="chh">
-                    <Chathome />
+                    <Calls />
                   </div>
                 </div>
                 <div className="col-lg-8">

@@ -1,10 +1,10 @@
-.roomaudio  .video-conference{
+ .roomvideo .video-conference{
     display: flex;
     background-color: rgba(22,27,33,255);
     overflow: hidden;
    height: 100vh !important;
 }
-.roomaudio  .video-conference .main-side{
+ .roomvideo .video-conference .main-side{
     width: 100% ;
     height:auto;
     transition:all 0.7s ease;
@@ -16,15 +16,18 @@
     margin: 0 !important;
 }
 
-.roomaudio  .video-conference .main-side ul{
+ .roomvideo .video-conference .main-side ul{
     list-style: none;
 }
 
-.roomaudio  .video-conference .main-side ul li{
+ .roomvideo .video-conference .main-side ul li{
     display:inline-block;
         margin: 25px 3px
 }
-.roomaudio  .video-conference .main-side .navbar .logo{
+.openmain{
+    width: 70% !important;
+}
+ .roomvideo .video-conference .main-side .navbar .logo{
     position: relative;
     width: 107px;
     text-align: center;
@@ -32,52 +35,63 @@
     margin-left: -21px;
 }
 
-.roomaudio  .video-conference .main-side .navbar .logo img{
+ .roomvideo .video-conference .main-side .navbar .logo img{
     width: 43px;
     height: 53px;
 }
-.roomaudio  .video-conference .main-side .navbar .title{
+ .roomvideo .video-conference .main-side .navbar .title{
     width: fit-content;
     color: white;
     font-weight: bold;
     margin-right: auto;
 
 }
-.roomaudio  .video-conference .main-side .navbar .title h4{
+ .roomvideo .video-conference .main-side .navbar .title h4{
 font-weight: bold;    
 }
-.roomaudio  .video-conference .main-side .navbar .title i{
+ .roomvideo .video-conference .main-side .navbar .title i{
     font-size: 25px;
 }
 .arrowback{
     color: white !important;
 }
-.roomaudio  .video-conference .main-side .navbar .grid-show i{
+ .roomvideo .video-conference .main-side .navbar .grid-show i{
 font-size: 25px;
 color: white;
 font-weight: bold;
 cursor: pointer;
 
 }
-.roomaudio  .video-conference .main-side .navbar .grid-show img{
-    width: 32px;
-    margin: 0px;
-    position: relative;
-    bottom: 3px;
-    left: 2px;
-    object-fit: cover;
-}
-.roomaudio  .video-conference .main-side .navbar .grid-show #grid4 i{
+ .roomvideo .video-conference .main-side .navbar .grid-show #grid4 i{
     font-size: 26px;
     position: relative;
     top: 2px;
 }
-.roomaudio  .video-conference .main-side .navbar .grid-show li{
+ .roomvideo .video-conference .main-side .navbar .grid-show li{
     display:inline-block;
 margin: 14px 3px
 }
+ .roomvideo .video-conference .main-side .navbar .grid-show #imgp{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    position: relative;
+    bottom: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    object-fit: cover;
+}
 
-.roomaudio  .video-conference .main-side .navbar .grid-show #grid6 i{
+.roomvideo .video-conference .main-side .navbar .grid-show #grid1 img{
+    width: 32px ;
+    margin: 0px ;
+    position: relative ;
+    bottom: 3px ;
+    left: 2px ;
+    object-fit: cover ;
+    cursor: pointer;
+}
+ .roomvideo .video-conference .main-side .navbar .grid-show #grid6 i{
     font-size: 26px;
     color: white;
     font-weight: bold;
@@ -85,37 +99,25 @@ margin: 14px 3px
     position: relative;
     top: 2px;
 }
-.roomaudio  .video-conference .main-side .navbar .grid-show #chhh{
+ .roomvideo .video-conference .main-side .navbar .grid-show #chhh{
     width: 34px;
     position: relative;
     left: 5px;
     top: -3px;
 }
-.roomaudio .video-conference .main-side .sendnameVtext{
-    font-size: 16px;
-    font-weight: 400;
-    color: white;
-    padding: 0px;
-    margin: 0px;
-    height: fit-content;
-    width: fit-content;
-    color:#f0273e;
-    position: relative;
-}
 .fa-comment-dots{
     margin-left: 20px;
     font-size: 27px !important;
-    border: none;
+    
 }
 .fa-comment-dots.active{
-    border-bottom: 2px solid white !important;
+    border-bottom: 2px solid white !important ;
 }
-.roomaudio  .video-conference .main-side .vi{
+ .roomvideo .video-conference .main-side .vi{
     display: flex;
     background-color: rgba(22,27,33,255)
     ;
 }
-
 .cp{
     text-align: center;
     justify-content: center;
@@ -140,21 +142,22 @@ margin: 14px 3px
     padding: 10px;
     right: 0;
     color: white;
+    z-index: 5000;
     cursor: pointer !important;
 }
-.roomaudio  .video-conference .main-side .vi .icon-opts ul i{
+ .roomvideo .video-conference .main-side .vi .icon-opts ul i{
     font-size: 20px;
     color: white;
     font-weight: bold;
     cursor: pointer;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream {
+ .roomvideo .video-conference .main-side .vi .vid-stream {
     display:flex;
     flex-direction: column;
     width: 100%;
     height: 80vh;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts{
     display: flex;
     position: relative;
     /* margin-left: 76px; */
@@ -164,13 +167,13 @@ margin: 14px 3px
     height: 57px;
 
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts img
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts img
 {
     position: absolute;
     top: 12px;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .nump{
-    width: fit-content;
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .nump{
+    width: 74px;
     border-radius: 9px;
     border: 2px solid #b9bec2;
     padding: 0px 4px 0px 33px;
@@ -182,10 +185,10 @@ margin: 14px 3px
     margin-top: 9px;
     font-size: 17px;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .nump:focus{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .nump:focus{
     outline: none;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts i{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts i{
     position: absolute;
     top: 21px;
     left: 10px;
@@ -193,13 +196,13 @@ margin: 14px 3px
     font-weight: bold;
     cursor: pointer;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .invite {
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .invite {
     flex:1;
     margin: 11px 0px 0px 0px;
     font-size: 20px;
     color: white;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .popup-wrapper {
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .popup-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -212,23 +215,23 @@ margin: 14px 3px
     padding: 10px 20px;
     transition: opacity 0.3s ease-in-out;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .popup-wrapper.active {
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .popup-wrapper.active {
     opacity: 1;
     pointer-events: all;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .popup {
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .popup {
     padding: 22px 25px;
     /* max-width: 380px; */
-    width: 500px;
-    height: 400px;
+    /* width: 500px; */
+    /* height: 400px; */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color:#333;
+    background-color: #333;
     border-radius: 15px;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .close-btn {
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .close-btn {
     position: absolute;
     top: 2px;
     right: 6px;
@@ -247,19 +250,19 @@ margin: 14px 3px
     -ms-transition: transform 0.3s, opacity 0.3s;
     -o-transition: transform 0.3s, opacity 0.3s;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .close-btn i{
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .close-btn i{
       font-size: 25px;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .close-btn:hover {
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .close-btn:hover {
     transform: scale(1.1);
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .copy{
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .copy{
     display: inline-flex;
     position: relative;
     width: 100%;
     height: 100%;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .copy button {
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .copy button {
     width: 20%;
     padding: 0px;
     font-size: 14px;
@@ -269,7 +272,7 @@ margin: 14px 3px
     border: none;
     font-weight: 100;
   }
-  .roomaudio  .video-conference .main-side .vi .vid-stream .opts .copy input{
+   .roomvideo .video-conference .main-side .vi .vid-stream .opts .copy input{
     width: 80%;
     height: 10%;
     border-radius: 0px;
@@ -278,7 +281,6 @@ margin: 14px 3px
   .screen-record video{
     width: 82%;
     display: flex;
-    /* margin: 0 auto; */
     position: absolute;
     z-index: 333;
     left: 50;
@@ -287,7 +289,7 @@ margin: 14px 3px
     transform: translate(-50%, -50%);
   }
 
-  .roomaudio  .video-conference .main-side  .screen-record  .popup-wrapper2 {
+   .roomvideo .video-conference .main-side  .screen-record  .popup-wrapper2 {
     position: fixed;
     top: 0;
     left: 0;
@@ -298,28 +300,16 @@ margin: 14px 3px
     padding: 10px 20px;
     transition: opacity 0.3s ease-in-out;
 }
-.roomaudio  .video-conference .main-side  .screen-record  .popup-wrapper2.hideop {
+ .roomvideo .video-conference .main-side  .screen-record  .popup-wrapper2.hideop {
   
     display: none;
 }
-.roomaudio  .video-conference .main-side  .screen-record  .popup-wrapper2.showop {
+ .roomvideo .video-conference .main-side  .screen-record  .popup-wrapper2.showop {
     opacity: 1;
     display: block;
     z-index: 9999;
   }
-  /* .roomaudio  .video-conference .main-side  .screen-record  .popup {
-    padding: 22px 25px;
-    max-width: 380px; */
-    /* width: 500px;
-    height: 400px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color:#333;
-    border-radius: 15px;
-  } */
-  .roomaudio  .video-conference .main-side  .screen-record  .close-btn2 {
+   .roomvideo .video-conference .main-side  .screen-record  .close-btn2 {
     position: absolute;
     top: 2px;
     right: 6px;
@@ -339,13 +329,13 @@ margin: 14px 3px
     -ms-transition: transform 0.3s, opacity 0.3s;
     -o-transition: transform 0.3s, opacity 0.3s;
   }
-  .roomaudio  .video-conference .main-side  .screen-record  .close-btn2 i{
+   .roomvideo .video-conference .main-side  .screen-record  .close-btn2 i{
       font-size: 25px;
   }
-  .roomaudio  .video-conference .main-side  .screen-record  .close-btn2:hover {
+   .roomvideo .video-conference .main-side  .screen-record  .close-btn2:hover {
     transform: scale(1.1);
   }  
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .invite i{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .invite i{
     position: relative;
     top: 0;
     margin-right: 18px;
@@ -353,7 +343,7 @@ margin: 14px 3px
     font-size: 18px;
     font-weight: bold;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .rec-time{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .rec-time{
     border-radius: 9px;
     border: 2px solid #b9bec2;
     padding: 5px 20px;
@@ -364,9 +354,9 @@ margin: 14px 3px
     color: white;
     width: fit-content;
     text-align: center;
-    width: 80px;
+     width: 80px;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .opts .rec-time #dottt{
+ .roomvideo .video-conference .main-side .vi .vid-stream .opts .rec-time #dottt{
     width: 7px;
     height: 7px;
     background: red;
@@ -376,7 +366,8 @@ margin: 14px 3px
     top: 11px;
     display: none;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids{
+
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -386,65 +377,101 @@ position: relative;
 
 }
 
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item{
-    width: 215px;
-    height: 182px;
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item{
+    width: 250px;
+    height: 190px;
     margin: 10px;
     overflow: hidden;
     position: relative;
     border-radius: 20px;
-    border: 2px solid rebeccapurple;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids video{
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids video{
     border-radius: 20px;
     width: 100%;
     height: 100%;
-    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: scaleX(-1);
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
+.roomvideo .video-conference .main-side .vi .vid-stream .vids canvas{
+    border-radius: 20px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    display: none;
+    z-index: 0;
+}
+.showmediapipe{
+    display: block !important;
+    z-index: 1000 !important;
+}
+.roomvideo .video-conference .main-side .sendnameStext{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    padding: 0px;
+    margin: 0px;
+    height: fit-content;
+    width: fit-content;
+    color: #e71c72;
+    position: relative;
+}
+.roomvideo .video-conference .main-side .sendnameVtext{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    padding: 0px;
+    margin: 0px;
+    height: fit-content;
+    width: fit-content;
+    color:#f0273e;
+    position: relative;
+}
+/* .react-scroll-to-bottom--css-zikcp-1n7m0yu {
+    height: fit-content !important;
+    overflow-y: auto !important;
+    width: fit-content !important;
+}
+.react-scroll-to-bottom--css-syszj-1n7m0yu {
+    height: fit-content !important;
+    overflow-y: auto !important;
+    width: fit-content !important;
+} */
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
     margin: 10px;
     overflow: hidden;
     position: relative;
     border-radius: 20px;
     display: none;
-    width: 215px;
-    height: 182px;
+    width: 250px;
+    height: 190px;
     border: 1px solid #333;
     text-align: center;
 }
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item img{
-    width: 100px;
-    height: 104px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-}
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .signlang .signvid{
-    width: 100%;
-    /* height: 104px; */
-    border-radius: 0px;
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids img{
+    width: 80%;
     height: 100%;
 }
 .showsign{
     display: block !important;
 }
 
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item .name{
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item .name{
     position: absolute;
-    bottom: 10px;
+    bottom: 4px;
     color: #fff;
-    right: 15px;
+    right: 12px;
     background: rgba(0,0,0,0.5);
     border-radius: 20px;
     cursor: pointer;
     padding: 2px;
     font-size: 14px;
+    z-index: 5000;
 }
 
-.roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item .icon {
+ .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item .icon {
     position: absolute;
     top: 5px;
     left: 7px;
@@ -456,6 +483,7 @@ position: relative;
     cursor: pointer;
     width: 30px;
     text-align: center;
+    z-index: 5000;
 }
 .footer{
     display:flex;
@@ -485,15 +513,41 @@ position: relative;
     -webkit-animation: my-animation 14s linear infinite;
     animation: my-animation 14s linear infinite; */
 }
- 
-.roomaudio .caption .pcap{
+.captionsign{
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    overflow: hidden;
+    height: fit-content;
+    /* background-color: rgba(0,0,0,0.4); */
+  
+    /* left: 47.4%; */
+
+    position: relative;
+    width: fit-content;
+    display: none;
+    overflow-wrap: anywhere;
+    /* -moz-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%); */
+    /* -moz-animation: my-animation 14s linear infinite;
+    -webkit-animation: my-animation 14s linear infinite;
+    animation: my-animation 14s linear infinite; */
+}
+.caption .pcap{
     font-size: 20px;
     font-weight: 300;
     color: white;
     position: relative;
     top: 8px;
 }
-
+.captionsign .pcaps{
+    font-size: 20px;
+    font-weight: 300;
+    color: white;
+    position: relative;
+    top: 8px;
+}
 /* for Firefox */
 @-moz-keyframes my-animation {
  from { -moz-transform: translateY(100%); }
@@ -550,9 +604,10 @@ position: relative;
     background-color: rgba(22,27,33,255);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 999999;
+    border: 1px solid darkmagenta;
     transition: 1s ease;
-    bottom: 19px;
+    bottom: 20px;
   }
  
   .dropdown-content ul{
@@ -580,7 +635,9 @@ position: relative;
     display: block;
     margin-bottom: 30px;
   }
-  
+  .fa-check{
+    color:white
+  }
 .footer .tools button{
 background: none;
 border: none;
@@ -652,7 +709,7 @@ width: 47px;
 .footer .fa-record-vinyl{
     color: red;
 }
-.roomaudio  .video-conference .ch{
+ .roomvideo .video-conference .ch{
     background-color: rgba(24,31,39,255);
 }
 .icon, .name{
@@ -680,38 +737,31 @@ width: 47px;
     background: #555;
   }
   @media only screen and (max-width: 800px) {
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
-        width: 215px;
-        height: 182px;
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
+        width: 250px;
+        height: 190px;
     }
     .footer .buttons #phonealt{
 
         width: 40px;
      
     }
-    .roomaudio  .video-conference .chat-side {
+     .roomvideo .video-conference .chat-side {
       width: 0%;
       transition:all 0.7s ease;
     }
-    .roomaudio  .video-conference .main-side{
-        width: 100%;
+     .roomvideo .video-conference .main-side{
+        width: 100%; 
         transition:all 0.7s ease;
         position: relative !important;
     }
-    .roomaudio  .video-conference .main-side .vi .vid-stream .opts{
+     .roomvideo .video-conference .main-side .vi .vid-stream .opts{
         display: none;
     }
-    .roomaudio  .video-conference .chat-side.open{
-       width: 100%;
-       display: block;
-       
-    }
-    
-    .roomaudio  .video-conference .main-side.openmain{
+     .roomvideo .video-conference .main-side.openmain{
         width:0% !important;
         position: relative !important;
         right: 100%;
-    
     }
     .fa-sign-out-alt{
         display: block !important;
@@ -721,14 +771,14 @@ width: 47px;
     .arrowback{
         display: none;
     }
-    .roomaudio  .video-conference{
+     .roomvideo .video-conference{
         height:100vh !important;
         
     }
-    .roomaudio  .video-conference .chat-side .chat {
+     .roomvideo .video-conference .chat-side .chat {
         height: 66% !important;
     }
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item .name{
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item .name{
         position: absolute;
         bottom: 5px !important;
         color: #fff;
@@ -740,7 +790,7 @@ width: 47px;
         font-size: 9px;
     }
     
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item .icon {
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item .icon {
         position: absolute;
         top: 5px !important;
         left: 7px !important;
@@ -756,7 +806,7 @@ width: 47px;
         display: flex;
         justify-content: center;
     }
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids {
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids {
         height: 73% !important;
         margin-top: 77px;
     }
@@ -777,35 +827,16 @@ width: 47px;
             top: 27px;
             right: -9px;
         }
-        .roomaudio  .video-conference .main-side .navbar .grid-show #imgp{
-            height: 35px;
-            width: 35px;
-            border-radius: 50%;
-            position: relative;
-            bottom: 5px;
-            margin-left: 10px;
-            cursor: pointer;
-            object-fit: cover;
-        }
-        .roomaudio  .video-conference .main-side .navbar .grid-show #grid6 img{
-            width: 30px;
-            position: relative;
-            top: -4px;
+
+         .roomvideo .video-conference .main-side .navbar .grid-show #grid1 img{
+            width: 32px !important;
+            margin: 0px !important;
+            position: relative !important;
+            bottom: 3px !important;
+            left: 2px !important;
+            object-fit: cover !important;
             border-radius: 0px;
-            height: 27px;
-        }
-        .roomaudio  .video-conference .main-side .navbar .grid-show #chhh{
-            width: 34px;
-            position: relative;
-            left: 5px;
-            top: -3px;
-            border-radius: 0px;
-        }
-        .roomaudio  .video-conference .main-side .navbar .grid-show #grid6 img{
-            width: 30px;
-            position: relative;
-            top: -4px;
-            border-radius: 0px;
+
         }
         .fa-comment-dots{
             margin-left: 0px !important;
@@ -813,24 +844,24 @@ width: 47px;
         }
   }
   @media only screen and (max-width: 600px) {
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
-        width: 180px;
-        height: 160px;
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item.signlang{
+        width: 250px;
+        height: 190px;
     }
-    .roomaudio  .video-conference .main-side .navbar .logo {
+     .roomvideo .video-conference .main-side .navbar .logo {
         position: relative;
         width: fit-content;
         text-align: center;
         margin-top: -12px;
         margin-left: 11px;
     }
-    .roomaudio  .video-conference .main-side .grid-show ul{
+     .roomvideo .video-conference .main-side .grid-show ul{
         margin: 0px;
         padding: 0px;
     }
-    .roomaudio  .video-conference .main-side .vi .vid-stream .vids .vid-item {
-        width: 180px;
-        height: 160px;
+     .roomvideo .video-conference .main-side .vi .vid-stream .vids .vid-item {
+        width: 250px;
+        height: 190px;
         margin: 5px;
         overflow: hidden;
         position: relative;
@@ -850,7 +881,7 @@ width: 47px;
         margin-left: 6px !important;
         text-align: center;
     }
-    .roomaudio  .video-conference .main-side .vi .vid-stream
+     .roomvideo .video-conference .main-side .vi .vid-stream
     {
         height: 76vh;
     }

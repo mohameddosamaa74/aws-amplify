@@ -10,6 +10,13 @@
     font-size: 27px;
     position: absolute;
 }
+.calendar img.logout{
+    width: 50px;
+    object-fit: cover;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
 .calendar   .main-side{
     width: 100% ;
     height:auto;
@@ -30,6 +37,7 @@
     display: contents;
 }
 .react-calendar__navigation {
+    justify-content: center;
     display: flex;
     height: 44px;
     margin-bottom: 1em;
@@ -132,5 +140,14 @@
       .calendar .cal{
         margin: 100px auto;
         width: 100%;
+    }
+    .react-calendar__navigation {
+        justify-content: center;
+        display: flex;
+        height: 44px;
+        margin-bottom: 1em;
+        font-size: 20px;
+        font-weight: bold;
+        /* color: blue; */
     }
 }

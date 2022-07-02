@@ -23,27 +23,11 @@ i{
     display:inline-block;
         margin: 25px 3px
 }
-
-/* .home .main-side .navbar .grid-show {
-    padding: 22px 0px;
-} */
 .home .main-side .vi{
     display: flex;
     background-color: rgba(22,27,33,255)
     ;
 }
-.home .main-side .vi .caption{
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 5px;
-    width: 80%;
-    margin: 0 auto;
-    overflow: hidden;
-    
-}
-
 .home .main-side .vi .icon-opts ul i{
     font-size: 20px;
     color: white;
@@ -63,8 +47,6 @@ i{
 .home .main-side .vi .vid-stream .prof{
     padding: 15px;
     position: relative;
-    opacity: 1;
-    display: block;
 }
 
  .dots{
@@ -98,9 +80,6 @@ i{
     display: flex;
     flex-wrap: wrap;
 }
-.act{
-    border-bottom: 1px solid #fff !important;
-}
 @media only screen and (max-width: 800px) {
     .history{
         display: block;
@@ -108,17 +87,6 @@ i{
     .home{
   
         height: 100% !important;
-    }
-    .home .main-side .navbar .logo{
-        width:fit-content;
-        font-size: 15px !important;
-    }
-    .home .main-side .navbar .title{
-        width: 100%;
-        display: flex;
-    }
-    .home .navbar input{
-      width: 83%;
     }
     .home .main-side .vi .vid-stream {
         display: flex;
@@ -132,37 +100,13 @@ i{
     .home .main-side .vi .vid-stream .dailymeeting {
         margin-bottom: 10px;
     }
-    .dots{
-        position: absolute;
-        top:107px !important;
-        right: 7px;
-        display: block !important;
-        color: #fff !important;
-        border: none;
-    }
-    .openhome{
-        display: none !important;
-        transition: all 0.7s ease;
-        opacity: 0 !important;
-    
-    
 }
-}
-@media  (min-width:801px )and (max-width: 992px) {
-    .dots{
-        position: absolute;
-        left:15px !important;
-      
-        display: block !important;
-        color: #fff !important;
-        border: none;
-        bottom: 113px;
+@media only screen and (max-width: 992px) {
+    .home{
+        background-color: rgba(22,27,33,255);
+        overflow-y: auto;
+        height: 100%;
+        overflow-x: hidden;
+        height: 100% !important;
     }
-    .openhome{
-        display: none !important;
-        transition: all 0.7s ease;
-        opacity: 0 !important;
-    
-    
-     }
 }

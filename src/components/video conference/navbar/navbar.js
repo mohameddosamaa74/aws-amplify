@@ -1,8 +1,6 @@
-import react from "react";
-import { NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import logoutimg from '../../../img/icons8-logout-32.png'
-import "./navbar.css";
+import react from 'react';
+import { NavLink } from 'react-router-dom';
+import './navbar.css';
 const Navbar = () => {
   const opennav = () => {
     const icon = document.querySelector('.toggler');
@@ -11,15 +9,14 @@ const Navbar = () => {
       document.querySelector('.toggler').classList.toggle('fa-times');
     };
   };
-  const history = useHistory();
-  const logout = () => {
-    window.localStorage.removeItem('user');
-    history.push('/');
-  };
   return (
     <react.Fragment>
       <div className="icon-opts">
-      <i className="fa fa-ellipsis-h toggler" aria-hidden="true"onClick={opennav}></i>
+        <i
+          className="fa fa-ellipsis-h toggler"
+          aria-hidden="true"
+          onClick={opennav}
+        ></i>
         <ul className="nav justify-content-center">
           <NavLink to="/home" className="linkk">
             <li className="nav-item">
@@ -36,18 +33,16 @@ const Navbar = () => {
               <i className="fas fa-user-friends"></i>
             </li>
           </NavLink> */}
-          <NavLink to="/notifications" className="linkk">
+          {/* <NavLink to="/notifications" className="linkk">
             <li className="nav-item">
               <i className="fas fa-bell"></i>
             </li>
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/calendar" className="linkk">
             <li className="nav-item">
               <i className="fas fa-calendar-alt"></i>
             </li>
           </NavLink>
-            <li className="nav-item logimg">
-            <img src={logoutimg} alt="a" onClick={logout}/></li>
         </ul>
       </div>
     </react.Fragment>

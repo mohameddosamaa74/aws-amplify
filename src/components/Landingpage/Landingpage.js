@@ -24,14 +24,14 @@ import l2 from '../../img/l2.jpg';
 import l3 from '../../img/l3.jpg';
 import { useHistory } from 'react-router';
 const LandingPage = () => {
-  //   const tempuser = localStorage.getItem("user");
-  // //   let user = JSON.parse(tempuser);
-  //   if (tempuser === null) {
-  //     return <Redirect to="/login" />;
-  //   }
+  let tempuser = localStorage.getItem('user');
+  let user = JSON.parse(tempuser);
   const history = useHistory();
   const login = () => {
     history.push('/login');
+  };
+  const gohome = () => {
+    history.push('/home');
   };
   const activeLink = () => {
     const link = document.querySelectorAll('.land a');
@@ -64,7 +64,20 @@ const LandingPage = () => {
                 <a href="#about">About Us</a>
               </li>
             </ul>
-            <button onClick={login}>Login</button>
+            {tempuser ? (
+              <div className="profileandname">
+                {' '}
+                <img
+                  className="profilee"
+                  src={user.image}
+                  onClick={gohome}
+                  alt="profile"
+                />
+                <span onClick={gohome}>{user.name}</span>
+              </div>
+            ) : (
+              <button onClick={login}>Login</button>
+            )}
           </div>
           <div className="intro">
             <div className="textintro">
@@ -329,7 +342,6 @@ const LandingPage = () => {
             <div className="row">
               <div className="col-md-6">
                 <h2>
-                
                   <img src={logo} alt="as" /> Connect
                 </h2>
                 <a href="#facebook">

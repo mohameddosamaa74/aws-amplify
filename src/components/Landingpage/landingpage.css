@@ -18,6 +18,19 @@
 .landing .land .navbarr img{
     height: 50px;
 }
+.landing .land .navbarr .profilee{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.landing .land .navbarr span{
+    color: white;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+}
 .landing .land .navbarr .ulnav{
     display: flex;
     align-items: center;
@@ -359,7 +372,7 @@ margin-bottom: 10px;
     font-size: 16px;
     }
 .landing .footer i:hover{color:cyan}
-.copy{
+.landing .copy{
     background-color: #1e6282;padding: 20px 0;color: #fff;text-align: center;
 }
 .copy h3{font-size: 20px}
@@ -670,6 +683,12 @@ margin-bottom: 10px;
         
 }
 @media only screen and (max-width: 700px) {
+    .landing .land .navbarr .ulnav {
+       padding: 0px;
+    }
+    .landing .land .navbarr .ulnav li {
+        margin: 5px !important;
+    }
     .landing .land .intro{
         display: flex;
         margin-top: 111px;
@@ -712,8 +731,7 @@ margin-bottom: 10px;
         }
         .landing .land .navbarr .ulnav li a{
             text-decoration: none;
-            text-decoration: none;
-            font-size: 15px;
+            font-size: 12px;
             color: white !important;
         }
         .landing .land .navbarr  button{

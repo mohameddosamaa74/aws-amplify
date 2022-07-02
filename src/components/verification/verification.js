@@ -6,6 +6,7 @@ import authentication from '../firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import Loader from '../loader/loader';
 import NewPassword from '../forgetpass/password';
+import { Api } from '../api/api';
 // import firebase from "../firebase";
 class Verification extends Component {
   state = {
@@ -29,7 +30,14 @@ class Verification extends Component {
   header = {
     API_KEY: process.env.REACT_APP_API_KEY,
     'Content-Type': 'application/json',
-    // 'Content-Type': 'application/x-www-form-urlencoded',
+  };
+  nextotp = () => {
+    const otp = document.querySelectorAll('.otp');
+    for (let i = 0; i < otp.length - 1; i++) {
+      otp[i].addEventListener('keyup', function () {
+        this.nextElementSibling.focus();
+      });
+    }
   };
 
   setUpRecaptcha = () => {
@@ -37,10 +45,7 @@ class Verification extends Component {
       'recap',
       {
         size: 'invisible',
-        callback: (response) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
-          // onSignInSubmit();
-        },
+        callback: (response) => {},
       },
       authentication
     );
@@ -53,8 +58,6 @@ class Verification extends Component {
     signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
       .then((confirmationResult) => {
         this.setState({ loading: false });
-        // SMS sent. Prompt user to type the code from the message, then sign the
-        // user in with confirmationResult.confirm(code).
         window.confirmationResult = confirmationResult;
         console.log('sent');
       })
@@ -65,16 +68,13 @@ class Verification extends Component {
   update = async () => {
     let tempuser = localStorage.getItem('user');
     let user = JSON.parse(tempuser);
-    let data2 = await fetch(
-      `https://api.connect-asl.site/api/users/${user.mobile}`,
-      {
-        headers: this.header,
-        method: 'PATCH',
-        body: JSON.stringify({
-          mobile: this.state.mobile,
-        }),
-      }
-    );
+    let data2 = await fetch(`${Api}/${user.mobile}`, {
+      headers: this.header,
+      method: 'PATCH',
+      body: JSON.stringify({
+        mobile: this.state.mobile,
+      }),
+    });
     let res2 = await data2.json();
     if (res2.status === 'success') {
       localStorage.setItem('user', JSON.stringify(res2.data));
@@ -85,7 +85,7 @@ class Verification extends Component {
   };
 
   signup = async () => {
-    let data2 = await fetch(`https://api.connect-asl.site/api/users/`, {
+    let data2 = await fetch(`${Api}/`, {
       headers: this.header,
       method: 'POST',
       body: JSON.stringify({
@@ -104,9 +104,9 @@ class Verification extends Component {
     }
   };
   forget = async () => {
-      this.setState({
-        very: 'updatedpass',
-      });
+    this.setState({
+      very: 'updatedpass',
+    });
   };
   handlesubotp = async (e) => {
     e.preventDefault();
@@ -130,8 +130,7 @@ class Verification extends Component {
           await this.signup();
         } else if (this.state.direct === 'updated') {
           await this.update();
-        }
-        else if (this.state.direct === 'forget') {
+        } else if (this.state.direct === 'forget') {
           await this.forget();
         }
         // ...
@@ -148,7 +147,9 @@ class Verification extends Component {
     state[e.currentTarget.name] = e.currentTarget.value;
     this.setState(state);
   };
-
+  componentDidMount() {
+    this.nextotp();
+  }
   render() {
     if (this.state.very === 'verified') {
       return (
@@ -165,9 +166,7 @@ class Verification extends Component {
       );
     }
     if (this.state.very === 'updatedpass') {
-      return (
-          <NewPassword Phone={this.state.mobile}/>
-      );
+      return <NewPassword Phone={this.state.mobile} />;
     }
     return (
       <react.Fragment>
@@ -182,6 +181,7 @@ class Verification extends Component {
               <form onSubmit={this.handlesubotp}>
                 <div className="code">
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num1"
@@ -189,6 +189,7 @@ class Verification extends Component {
                     maxLength={1}
                   />
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num2"
@@ -196,6 +197,7 @@ class Verification extends Component {
                     maxLength={1}
                   />
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num3"
@@ -203,6 +205,7 @@ class Verification extends Component {
                     maxLength={1}
                   />
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num4"
@@ -210,6 +213,7 @@ class Verification extends Component {
                     maxLength={1}
                   />
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num5"
@@ -217,6 +221,7 @@ class Verification extends Component {
                     maxLength={1}
                   />
                   <input
+                    className="otp"
                     required
                     type="text"
                     name="num6"
@@ -233,72 +238,6 @@ class Verification extends Component {
             </div>
           </div>
         </div>
-        {/* <div className="verification">
-      <div className="about-us">
-        <div className="row">
-          <div className="col-md-6">
-        <div className="info-box">
-          <h2>Enter verification code</h2>
-          <p> We have sent the Verification code to <br/> {this.state.mobile} </p>
-         
-          <form onSubmit={this.handlesubotp}>
-            <div className="code">
-              <input
-                required
-                type="text"
-                name="num1"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-              <input
-                required
-                type="text"
-                name="num2"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-              <input
-                required
-                type="text"
-                name="num3"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-              <input
-                required
-                type="text"
-                name="num4"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-              <input
-                required
-                type="text"
-                name="num5"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-              <input
-                required
-                type="text"
-                name="num6"
-                onChange={this.handlechangesignup}
-                maxLength={1}
-              />
-            </div>
-            <span>send the code again</span>
-            <button type="submit">Verify</button>
-          </form>
-        </div>
-        </div>
-        <div className="col-md-6">
-        <div className="image-box">
-          <img src={verify} alt="verification"/>
-        </div>
-        </div>
-      </div>
-      </div>
-    </div> */}
       </react.Fragment>
     );
   }

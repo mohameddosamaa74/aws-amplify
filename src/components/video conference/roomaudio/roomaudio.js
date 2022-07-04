@@ -471,8 +471,8 @@ const Roomaudio = (props) => {
                           <i className="fas fa-times"></i>
                         </button>
                         <div className="copy">
-                          <button onClick={Copy}>Copy Link</button>
                           <input type="text" id="paste-box" />
+                          <button onClick={Copy}>Copy Link</button>
                         </div>
                       </div>
                     </div>

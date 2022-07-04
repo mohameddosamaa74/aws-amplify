@@ -49,6 +49,20 @@
     .lst .logimg:hover img{
         opacity: 1;
     }
+    .lst .calenderr{
+        position: relative;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    .lst .calenderr i{
+        transition: all 0.5s ease;
+        opacity: 0.5;
+        color: #f8fff3;
+        font-size: 112px;
+    }
+    .lst .calenderr:hover  i{
+        opacity: 1;
+    }
     .callaudio,.callvideo{
         position: relative;
         cursor: pointer;

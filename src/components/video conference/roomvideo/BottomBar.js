@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import styled from 'styled-components';
 import phonealt from '../../../img/index 1.png';
 import tool from '../../../img/MicrosoftTeams-image8) 1.png';
@@ -14,12 +14,12 @@ const BottomBar = ({
   screenShare,
   toggleRecording,
   text,
-  signToText,
   textsign,
   toSign,
   settoSign,
   senderName,
   setsignToText,
+  signToText,
   textcaption,
   roomId,
   setsignToTextCaption,
@@ -48,20 +48,23 @@ const BottomBar = ({
       };
       tool[1].onclick = () => {
         const caption = document.querySelector('.caption');
+        const sendNameVs = document.getElementById('sendNameVs');
         tool[1].classList.toggle('activetool');
         caption.classList.toggle('showsign');
+        sendNameVs.classList.toggle('showName');
       };
       tool[2].onclick = () => {
         const caption = document.querySelector('.captionsign');
+        const sendNameStext = document.getElementById('sendNameStext');
         tool[2].classList.toggle('activetool');
         caption.classList.toggle('showsign');
+        sendNameStext.classList.toggle('showName');
         setsignToTextCaption((signcheck) => !signcheck);
       };
       tool[3].onclick = () => {
-        const signmedia = document.getElementById('canvas');
+        // const signmedia = document.getElementById('canvas');
         tool[3].classList.toggle('activetool');
-
-        signmedia.classList.toggle('showmediapipe');
+        // signmedia.classList.toggle('showmediapipe');
         setsignToText((signcheck) => !signcheck);
       };
     }
@@ -95,8 +98,10 @@ const BottomBar = ({
           </div>
         </div>
         <div className="buttons">
-          <span className="sendnameStext">{sendNameVs}</span>
           <div className="cp">
+            <span className="sendnameStext" id="sendNameVs">
+              {sendNameVs && sendNameVs + ': '}
+            </span>
             <ScrollToBottom>
               <div className="caption lead text-center" id="textarea">
                 <p className="pcap" ref={text}></p>
@@ -104,8 +109,10 @@ const BottomBar = ({
             </ScrollToBottom>
           </div>
 
-          <span className="sendnameVtext">{sendNameStext}</span>
           <div className="cp">
+            <span className="sendnameVtext" id="sendNameStext">
+              {sendNameStext && sendNameStext + ': '}
+            </span>
             <ScrollToBottom>
               <div className="captionsign lead text-center" id="textarea">
                 <p className="pcaps" ref={textsign}></p>

@@ -11,13 +11,6 @@ const Dailymeeting = () => {
   function reJoin(id, typeMeet) {
     history.push(`/room${typeMeet}/${id}`);
   }
-  // function remove (id){
-  //   let item = meets;
-  //   item=item.filter(id!==item.roomId)
-  //   setMeets(item)
-  //   console.log("as")
-
-  // }
   useEffect(() => {
     socket.emit('get-rooms-user', { mobile: user.mobile });
     socket.on('get-rooms-user', ({ userRooms }) => {
@@ -39,9 +32,6 @@ const Dailymeeting = () => {
           roomName: roomId.split('+')[1] || 'Unnamed',
         },
       ]);
-      console.log(users.length - users.slice(-3).length);
-      console.log(roomId.split('+')[1]);
-      console.log(roomId.split('+'));
     });
     // eslint-disable-next-line
   }, []);

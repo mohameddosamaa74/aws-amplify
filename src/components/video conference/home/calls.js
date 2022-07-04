@@ -72,7 +72,9 @@ const Calls = () => {
     openpopup();
     audiomeet();
   };
-  console.log(roomName);
+  const calender=()=>{
+    history.push('/calendar');
+  }
   return (
     <react.Fragment>
       <div className="lst">
@@ -80,7 +82,6 @@ const Calls = () => {
           <div className="row">
             <div className="col-sm-6">
               <div className="callaudio">
-                <div className="overlay"></div>
                 <i
                   className="fas fa-phone-alt popup-open"
                   onClick={joinaudio}
@@ -90,14 +91,18 @@ const Calls = () => {
             </div>
             <div className="col-sm-6">
               <div className="callvideo">
-                <div className="overlay"></div>
                 <i className="fas fa-video popup-open" onClick={joinvideo}></i>
                 <div className="tit">New video call</div>
               </div>
             </div>
             <div className="col-sm-6">
+              <div className="calenderr">
+                <i className="fas fa-calendar-alt" onClick={calender}></i>
+                <div className="tit">Calendar</div>
+              </div>
+            </div>
+            <div className="col-sm-6">
               <div className="logimg">
-                <div className="overlay"></div>
                 <div className="options">
                   <div className="popup-wrapper">
                     <div className="popup">

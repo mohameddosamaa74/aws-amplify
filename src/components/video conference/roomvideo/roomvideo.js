@@ -286,6 +286,7 @@ const Roomvideo = (props) => {
     } else {
       SpeechRecognition.stopListening();
     }
+    
     // eslint-disable-next-line
   }, [listening, audio]);
   function createPeer(userId, caller, stream) {
@@ -331,14 +332,9 @@ const Roomvideo = (props) => {
     return peersRef.current.find((p) => p.peerID === id);
   }
   function createUserVideo(peer, index, arr) {
-    // console.log(userVideoAudio[peer.userName])
     return (
-      <div
-        className={`width-peer${peers.length > 8 ? '' : peers.length} vid-item`}
-        onClick={expandScreen}
-        key={index}
-      >
-        <i className="fas fa-expand"></i>
+      <div className="vid-item" key={index}>
+        <i className="fas fa-expand" onClick={expandScreen}></i>
         <VideoCard key={index} peer={peer} number={arr.length} />
 
         <div className="icon">
@@ -436,19 +432,19 @@ const Roomvideo = (props) => {
       screenTrackRef.current.onended();
     }
   };
-  const expandScreen = (e) => {
-    const elem = e.target;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
+  const expandScreen = () => {
+    const watchvid =document.querySelector('.vid-item video');
+    if (watchvid.requestFullscreen) {
+      watchvid.requestFullscreen();
+    } else if (watchvid.mozRequestFullScreen) {
       /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
+      watchvid.mozRequestFullScreen();
+    } else if (watchvid.webkitRequestFullscreen) {
       /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
+      watchvid.webkitRequestFullscreen();
+    } else if (watchvid.msRequestFullscreen) {
       /* IE/Edge */
-      elem.msRequestFullscreen();
+      watchvid.msRequestFullscreen();
     }
   };
   const toggleRecording = () => {
@@ -545,8 +541,8 @@ const Roomvideo = (props) => {
                           <i className="fas fa-times"></i>
                         </button>
                         <div className="copy">
-                          <button onClick={Copy}>Copy Link</button>
                           <input type="text" id="paste-box" />
+                          <button onClick={Copy}>Copy Link</button>
                         </div>
                       </div>
                     </div>
@@ -563,24 +559,19 @@ const Roomvideo = (props) => {
                       toSign={toSign}
                       roomId={roomId}
                       user={user}
-                      // settextcaption={(textcaption)=>settextcaption(textcaption)}
                       text={text}
                       senderName={senderName}
                     />
                     <span className="name" ref={senderName}></span>
                   </div>
                   <div className="vid-item">
-                    <div
-                      className={`width-peer${
-                        peers.length > 8 ? '' : peers.length
-                      }`}
-                    >
-                      <i className="fas fa-expand" />
+                    <div>
+                      <i className="fas fa-expand" onClick={expandScreen}></i>
                       <video
-                        onClick={expandScreen}
                         ref={userVideoRef}
                         muted
                         autoPlay
+                        mplayer="video"
                         playsInline
                       ></video>
                       <SignToText
@@ -590,6 +581,7 @@ const Roomvideo = (props) => {
                         signToText={signToText}
                         audio={audio}
                         user={user}
+                        userVideoAudio={userVideoAudio['localUser']}
                       />
                     </div>
                     <div className="icon">

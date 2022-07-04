@@ -35,8 +35,10 @@ const BottomBar = ({
       };
       tool[1].onclick = () => {
         const caption = document.querySelector('.caption');
+        const sendnameStext = document.getElementById('sendnameStext');
         tool[1].classList.toggle('activetool');
         caption.classList.toggle('showsign');
+        sendnameStext.classList.toggle('showName');
       };
     }
   };
@@ -62,8 +64,8 @@ const BottomBar = ({
           </div>
         </div>
         <div className="buttons">
-          <span className="sendnameStext">{sendNameVs}</span>
           <div className="cp">
+            <span className="sendnameStext"id='sendnameStext'>{sendNameVs && sendNameVs +': '} </span>
             <ScrollToBottom>
               <div className="caption lead text-center" id="textarea">
                 <p className="pcap" ref={text}></p>

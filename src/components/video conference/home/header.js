@@ -6,7 +6,6 @@ import { Redirect } from 'react-router';
 import logo from '../../../img/MicrosoftTeams-image4) 1.png';
 const Header = (props) => {
   const tempuser = localStorage.getItem('user');
-  // console.log(tempuser)
   if (tempuser === null) {
     return <Redirect to="/login" />;
   }
@@ -15,7 +14,6 @@ const Header = (props) => {
     props.r.history.push('/');
   };
   const user = JSON.parse(tempuser);
-  // console.log(user)
   return (
     <react.Fragment>
       <div className="head">

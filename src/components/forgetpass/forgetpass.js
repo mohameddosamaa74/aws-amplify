@@ -32,7 +32,6 @@ const Forget = () => {
     const error = validation();
     if (error) return;
     // setload(true);
-    console.log('asdad');
     let data = await fetch(`${Api}/${Phone}`, {
       method: 'GET',
       headers: {
@@ -55,7 +54,6 @@ const Forget = () => {
           // user in with confirmationResult.confirm(code).
           setverify(true);
           window.confirmationResult = confirmationResult;
-          console.log('sent');
         })
         .catch((error) => {
           // setload(false);

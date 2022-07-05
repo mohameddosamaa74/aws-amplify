@@ -70,7 +70,6 @@ class Form extends Component {
     });
     let res = await data.json();
 
-    console.log(res);
     if (res.status === 'success') {
       this.setState({ loading: false });
       const error = {};
@@ -92,7 +91,6 @@ class Form extends Component {
           loginn: 'true',
         });
         window.confirmationResult = confirmationResult;
-        console.log('sent');
       })
       .catch((error) => {
         this.setState({ loading: false });
@@ -155,7 +153,6 @@ class Form extends Component {
     }
     if (res.status === 'success') {
       this.setState({ loading: false });
-      console.log(res);
       delete res.data._id;
       localStorage.setItem('user', JSON.stringify(res.data));
       this.setState({

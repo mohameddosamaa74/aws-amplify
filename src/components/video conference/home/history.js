@@ -12,14 +12,13 @@ const Dailymeeting = () => {
     history.push(`/room${typeMeet}/${id}`);
   }
   useEffect(() => {
+  
+    setMeets([]);
     socket.emit('get-rooms-user', { mobile: user.mobile });
     socket.on('get-rooms-user', ({ userRooms }) => {
-      console.log('asdad');
       userRooms.slice(-3).forEach((roomId) => {
         socket.emit('get-all-users', { roomId });
       });
-
-      console.log(userRooms);
     });
     socket.on('get-all-users', ({ users, roomId, typeMeet }) => {
       setMeets((prev) => [
@@ -31,11 +30,15 @@ const Dailymeeting = () => {
           roomId,
           roomName: roomId.split('+')[1] || 'Unnamed',
         },
+
       ]);
     });
+    return () => {
+      socket.off('get-all-users');
+      socket.off('get-rooms-user');
+    }
     // eslint-disable-next-line
   }, []);
-
   return (
     <react.Fragment>
       {meets.map((meet) => (

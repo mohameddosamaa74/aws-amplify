@@ -23,7 +23,6 @@ const NewPassword = (props) => {
     seterror(error);
     return Object.keys(error).length === 0 ? null : error;
   };
-  // console.log(tempuser)
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValue((prevState) => {
@@ -51,11 +50,8 @@ const NewPassword = (props) => {
     });
     let res = await data.json();
     if (res.status === 'success') {
-      console.log('good');
       history.push('/login');
-    } else {
-      console.log('error');
-    }
+    } 
   };
   return (
     <react.Fragment>

@@ -59,7 +59,6 @@ class Verification extends Component {
       .then((confirmationResult) => {
         this.setState({ loading: false });
         window.confirmationResult = confirmationResult;
-        console.log('sent');
       })
       .catch((error) => {
         this.setState({ loading: false });
@@ -125,7 +124,6 @@ class Verification extends Component {
       .then(async (result) => {
         // User signed in successfully.
 
-        console.log('goood');
         if (this.state.direct === 'signup') {
           await this.signup();
         } else if (this.state.direct === 'updated') {

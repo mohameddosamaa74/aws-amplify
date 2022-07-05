@@ -102,8 +102,8 @@ margin: 14px 3px
     top: -3px;
 }
 .roomaudio .video-conference .main-side .sendnameVtext{
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 300;
     color: white;
     display: none;
 }
@@ -475,35 +475,13 @@ position: relative;
 }
  
 .roomaudio .caption .pcap{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 300;
     color: white;
     position: relative;
-    top: 8px;
+    top: 7px;
 }
 
-/* for Firefox */
-@-moz-keyframes my-animation {
- from { -moz-transform: translateY(100%); }
- to { -moz-transform: translateY(-100%); }
-}
-/* for Chrome */
-@-webkit-keyframes my-animation {
- from { -webkit-transform: translateY(100%); }
- to { -webkit-transform: translateY(-100%); }
-}
-@keyframes my-animation {
- from {
-   -moz-transform: translateY(100%);
-   -webkit-transform: translateY(100%);
-   transform: translateY(100%);
- }
- to {
-   -moz-transform: translateY(-100%);
-   -webkit-transform: translateY(-100%);
-   transform: translateY(-100%);
- }
-}
 .footer .tools{
     padding: 0;
     margin: 0;
@@ -513,25 +491,15 @@ position: relative;
     position: relative;
     height: fit-content;
 }
-/* .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  } */
+
   .dropbtn img{
       width: 37px;
   }
-  /* The container <div> - needed to position the dropdown content */
   .dropdown {
     position: relative;
     display: inline-block;
     bottom: 0px;
   }
-  
-  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;

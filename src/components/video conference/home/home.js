@@ -11,7 +11,6 @@ import Calls from './calls';
 // eslint-disable-next-line
 const Home = (props) => {
   const tempuser = localStorage.getItem('user');
-  // console.log(tempuser)
   if (tempuser === null) {
     return <Redirect to="/login" />;
   }

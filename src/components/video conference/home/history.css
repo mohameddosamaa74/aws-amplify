@@ -5,6 +5,7 @@
     border-radius:20px ;
     padding: 10px;
     margin: 5px;
+    overflow: hidden;
 }
  .dailymeeting i{
     position: absolute;
@@ -19,6 +20,7 @@
     color: white;
     font-weight: bold;
     font-size: 20px;
+    word-wrap: break-word;
 }
  .dailymeeting ul{
     list-style: circle;

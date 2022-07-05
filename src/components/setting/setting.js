@@ -16,7 +16,6 @@ const Setting = (props) => {
   if (tempuser === null) {
     history.push('/');
   }
-  console.log(user);
   const [formValue, setFormValue] = useState({
     Name: user.name,
     Phone: user.mobile,
@@ -126,8 +125,6 @@ const Setting = (props) => {
   if (tempuser === null) {
     return <Redirect to="/login" />;
   }
-
-  // console.log(tempuser)
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValue((prevState) => {
@@ -161,10 +158,8 @@ const Setting = (props) => {
         document.getElementById('saveandcancel').style.display = 'none';
         setload(false);
         localStorage.setItem('user', JSON.stringify(res.data));
-        console.log(res);
       } else {
         setload(false);
-        console.log('error');
       }
     }
     if (!document.getElementById('inputgender').disabled) {
@@ -183,10 +178,8 @@ const Setting = (props) => {
         document.getElementById('saveandcancel').style.display = 'none';
         setload(false);
         localStorage.setItem('user', JSON.stringify(res.data));
-        console.log(res);
       } else {
         setload(false);
-        console.log('error');
       }
     }
     if (!document.getElementById('inputphone').disabled) {
@@ -198,14 +191,12 @@ const Setting = (props) => {
         },
       });
       let res = await data.json();
-      console.log(res);
       if (res.status === 'success') {
         document.getElementById('saveandcancel').style.display = 'none';
         setload(false);
         const error = {};
         error.mobile = 'this mobile already exist';
         seterror(error);
-        console.log(error.mobile);
         return;
       }
       setUpRecaptcha();
@@ -218,7 +209,6 @@ const Setting = (props) => {
           // user in with confirmationResult.confirm(code).
           setverify(true);
           window.confirmationResult = confirmationResult;
-          console.log('sent');
         })
         .catch((error) => {
           setload(false);
@@ -243,10 +233,8 @@ const Setting = (props) => {
         const error = {};
         error.oldPassword = 'the old password is not correctly';
         seterror(error);
-        console.log('error old pass');
       }
       if (res.status === 'success') {
-        console.log('sucsessold pass');
         let data = await fetch(urldata, {
           method: 'PATCH',
           body: JSON.stringify({
@@ -261,9 +249,8 @@ const Setting = (props) => {
         if (res.status === 'success') {
           document.getElementById('saveandcancel').style.display = 'none';
           setload(false);
-          console.log('good');
         } else {
-          console.log('error');
+          setload(false);
         }
       }
     }
@@ -271,7 +258,6 @@ const Setting = (props) => {
   const fileUpload = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    console.log(file);
 
     formData.append('image', file, file.name);
     const url = `${Api}/image/${user.mobile}`;
@@ -285,16 +271,12 @@ const Setting = (props) => {
     });
     let res = await data.json();
     if (res.status === 'success') {
-      console.log(res);
       delete res.data._id;
       localStorage.setItem('user', JSON.stringify(res.data));
       user = res.data;
       setpicture(user.image);
       document.getElementById('saveandcancel').style.display = 'none';
-    } else {
-      console.log('errr');
-    }
-    console.log(data);
+    } 
   };
   const renderPreview = () => {
     if (picture) {

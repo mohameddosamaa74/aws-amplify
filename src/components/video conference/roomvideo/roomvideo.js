@@ -3,7 +3,7 @@ import react from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import Peer from 'simple-peer';
 import socket from '../socket';
-import './room.css';
+import './roomvideo.css';
 import Navbar from '../navbar/navbar';
 import Chat from '../chat/chat';
 import logo from '../../../img/MicrosoftTeams-image4) 1.png';
@@ -27,7 +27,6 @@ const Copy = () => {
   document.execCommand('Copy');
 };
 const grid = () => {
-  console.log('grid');
   const grid6 = document.getElementById('grid6');
   const grid4 = document.getElementById('grid4');
   const grid1 = document.getElementById('grid1');
@@ -260,8 +259,6 @@ const Roomvideo = (props) => {
         } else {
           audio = !audio;
           peerIdx.audio = audio;
-          // audio ? speechRecognition.start() : speechRecognition.stop();
-          console.log(audio);
         }
 
         return {
@@ -333,8 +330,8 @@ const Roomvideo = (props) => {
   }
   function createUserVideo(peer, index, arr) {
     return (
-      <div className="vid-item" key={index}>
-        <i className="fas fa-expand" onClick={expandScreen}></i>
+      <div className="vid-item" key={index} onClick={expandScreen}>
+        {/* <i className="fas fa-expand" ></i> */}
         <VideoCard key={index} peer={peer} number={arr.length} />
 
         <div className="icon">
@@ -349,7 +346,6 @@ const Roomvideo = (props) => {
     );
   }
   function createUseroption(peer, index, arr) {
-    console.log(peer);
 
     return (
       <option disabled key={index}>
@@ -366,7 +362,6 @@ const Roomvideo = (props) => {
   const toggleCameraAudio = (e) => {
     const target = e.target.getAttribute('data-switch');
     setUserVideoAudio((preList) => {
-      console.log(userVideoRef);
       let videoSwitch = preList['localUser'].video;
       let audioSwitch = preList['localUser'].audio;
 
@@ -432,19 +427,19 @@ const Roomvideo = (props) => {
       screenTrackRef.current.onended();
     }
   };
-  const expandScreen = () => {
-    const watchvid =document.querySelector('.vid-item video');
+  const expandScreen = (e) => {
+    const watchvid =e.target
     if (watchvid.requestFullscreen) {
-      watchvid.requestFullscreen();
+      watchvid.requestFullscreen({navigationUI: 'hide'});
     } else if (watchvid.mozRequestFullScreen) {
       /* Firefox */
-      watchvid.mozRequestFullScreen();
+      watchvid.mozRequestFullScreen({navigationUI: 'hide'});
     } else if (watchvid.webkitRequestFullscreen) {
       /* Chrome, Safari & Opera */
-      watchvid.webkitRequestFullscreen();
+      watchvid.webkitRequestFullscreen({navigationUI: 'hide'});
     } else if (watchvid.msRequestFullscreen) {
       /* IE/Edge */
-      watchvid.msRequestFullscreen();
+      watchvid.msRequestFullscreen({navigationUI: 'hide'});
     }
   };
   const toggleRecording = () => {
@@ -525,7 +520,6 @@ const Roomvideo = (props) => {
                     <option disabled>{user.name}</option>
                     {peers &&
                       peers.map((peer, index, arr) => {
-                        console.log();
                         return createUseroption(peer, index, arr);
                       })}
                   </select>
@@ -566,12 +560,12 @@ const Roomvideo = (props) => {
                   </div>
                   <div className="vid-item">
                     <div>
-                      <i className="fas fa-expand" onClick={expandScreen}></i>
+                      {/* <i className="fas fa-expand"></i> */}
                       <video
+                        onClick={expandScreen}
                         ref={userVideoRef}
                         muted
                         autoPlay
-                        mplayer="video"
                         playsInline
                       ></video>
                       <SignToText

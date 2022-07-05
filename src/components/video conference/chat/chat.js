@@ -12,7 +12,6 @@ const Chat = ({ roomId }) => {
 
   useEffect(() => {
     socket.on('FE-receive-message', ({ msg, sender, img, inputImage }) => {
-      console.log({ msg, sender, img });
       setMsg((msgs) => [...msgs, { sender, msg, img, inputImage }]);
     });
   }, []);
@@ -39,7 +38,6 @@ const Chat = ({ roomId }) => {
     const text = document.getElementById('textt');
     const msg = text.value;
     if (msg || inputImage) {
-      console.log(msg, inputImage);
       socket.emit('BE-send-message', {
         roomId,
         msg,
@@ -50,7 +48,6 @@ const Chat = ({ roomId }) => {
       inputRef.current.value = '';
     }
     setinputImage('');
-    console.log('sent');
   };
 
   function importData() {

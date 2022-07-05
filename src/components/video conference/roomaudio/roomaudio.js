@@ -164,7 +164,6 @@ const Roomaudio = (props) => {
         socket.on('FE-user-join', ({ userId, info }) => {
           // all users
           let { user: newUser, audio } = info;
-          console.log(newUser);
 
           const peer = createPeer(userId, socket.id, stream);
           peer.userName = newUser.name;
@@ -248,7 +247,6 @@ const Roomaudio = (props) => {
           audio = !audio;
           peerIdx.audio = audio;
           // audio ? speechRecognition.start() : speechRecognition.stop();
-          console.log(audio);
         }
 
         return {
@@ -339,7 +337,6 @@ const Roomaudio = (props) => {
     );
   }
   function createUseroption(peer, index, arr) {
-    console.log(peer);
 
     return (
       <option disabled key={index}>
@@ -362,9 +359,6 @@ const Roomaudio = (props) => {
           userVideoRef.current.srcObject.getAudioTracks()[0];
         audioSwitch = !audioSwitch;
         userAudioTrack.enabled = audioSwitch;
-
-        // audioSwitch ? speechRecognition.start() : speechRecognition.stop();
-        console.log(audioSwitch);
       }
 
       return {
@@ -455,7 +449,7 @@ const Roomaudio = (props) => {
                     <option disabled>{user.name}</option>
                     {peers &&
                       peers.map((peer, index, arr) => {
-                        console.log();
+                     
                         return createUseroption(peer, index, arr);
                       })}
                   </select>

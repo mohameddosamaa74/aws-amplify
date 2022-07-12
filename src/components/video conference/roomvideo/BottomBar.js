@@ -95,7 +95,7 @@ const BottomBar = ({
         </div>
         <div className="buttons">
           <div className="cp">
-            <span className="sendnameStext" id="sendNameVs">
+            <span className="sendnameVtext" id="sendNameVs">
               {sendNameVs && sendNameVs + ': '}
             </span>
             <ScrollToBottom>
@@ -106,7 +106,7 @@ const BottomBar = ({
           </div>
 
           <div className="cp">
-            <span className="sendnameVtext" id="sendNameStext">
+            <span className="sendnameStext" id="sendNameStext">
               {sendNameStext && sendNameStext + ': '}
             </span>
             <ScrollToBottom>

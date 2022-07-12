@@ -8,6 +8,7 @@ import iconcall from '../../img/icons8-ringer-volume-32.png';
 import iconrecord from '../../img/icons8-music-record-32.png';
 import icontrans from '../../img/icons8-closed-captioning-32.png';
 import googleplay from '../../img/googleplay.png';
+import WOW from 'wowjs';
 import imgapp from '../../img/image 28.png';
 import group from '../../img/Group 1738.png';
 import member1 from '../../img/salama.jpg';
@@ -18,7 +19,7 @@ import member5 from '../../img/tabarani.jpg';
 import member6 from '../../img/hassib.jpg';
 import member7 from '../../img/heba.jpg';
 import member8 from '../../img/menna.jpg';
-import landimg from '../../img/la1.jpg';
+import landimg from '../../img/la.png';
 import l1 from '../../img/l1.jpg';
 import l2 from '../../img/l2.jpg';
 import l3 from '../../img/l3.jpg';
@@ -44,6 +45,9 @@ const LandingPage = () => {
   };
   useEffect(() => {
     activeLink();
+      new WOW.WOW({
+        live: false
+      }).init();
   }, []);
   return (
     <react.Fragment>
@@ -81,15 +85,15 @@ const LandingPage = () => {
           </div>
           <div className="intro">
             <div className="textintro">
-              <h2>
+              <h2 className='wow fadeInUp'  data-wow-duration="1.5s">
                 Social communication system for the signer and <br /> non-signer
                 people{' '}
               </h2>
               <ul>
-                <li>Sign language to text </li>
-                <li>Speech to text </li>
-                <li>Speech to sign language </li>
-                <li>video communication </li>
+                <li className='wow fadeInUp'  data-wow-duration="2s">Sign language to text </li>
+                <li className='wow fadeInUp'  data-wow-duration="2.5s">Speech to text </li>
+                <li className='wow fadeInUp'  data-wow-duration="3s">Speech to sign language </li>
+                <li className='wow fadeInUp'  data-wow-duration="3.5s">video communication </li>
               </ul>
             </div>
             <div className="imgintro">
@@ -318,10 +322,12 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="android">
-          <div className="imgapp">
+          <div className="imgapp wow fadeInLeft"     data-wow-duration="1.5s"
+                data-wow-offset="100">
             <img src={imgapp} alt="app" />
           </div>
-          <div className="textapp">
+          <div className="textapp wow fadeInRight"     data-wow-duration="1.5s"
+                data-wow-offset="100">
             <div className="textcontent">
               <h3>Download our app </h3>
               <h1>
@@ -329,8 +335,7 @@ const LandingPage = () => {
                 <br /> More Easily
               </h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut
+              stay connected with people from your android phone
               </p>
               <img src={googleplay} alt="googleplay" />
             </div>

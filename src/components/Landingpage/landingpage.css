@@ -9,6 +9,7 @@
     background: linear-gradient(118.54deg, #ED4690 -34.81%, #5522CC 63.38%);
     mix-blend-mode: normal;
     opacity: 0.9;
+    overflow: hidden;
 }
 .landing .land .navbarr{
     display: flex;
@@ -58,7 +59,7 @@
 }
 .landing .land .intro{
 display: flex;
-margin-top: 111px;
+margin-top: 160px;
 padding: 0px 40px;
 }
 .landing .land .imgintro{
@@ -72,8 +73,8 @@ padding: 0px 40px;
     text-align: center;
 }
 .landing .land .imgintro img{
-    border-radius: 35px;
-    width: 80%;
+    /* border-radius: 35px; */
+    width:auto;
 }
 .landing .land .textintro{
     width: 50%;
@@ -88,7 +89,6 @@ padding: 0px 40px;
     text-align: initial;
     margin-left: 27px;
     color: white;
-    font-weight: bold;
 }
 .landing .land .textintro ul{
 margin-top: 22px;
@@ -395,8 +395,11 @@ margin-bottom: 10px;
     }
 }
 @media only screen and (max-width: 999px) {
+    .landing .land{
+        height: 100%;
+    }
     .landing .land .intro{
-        display: flex;
+        display: flex; 
         margin-top: 111px;
         padding: 0px;
         }
@@ -411,8 +414,7 @@ margin-bottom: 10px;
             text-align: center;
         }
         .landing .land .imgintro img{
-            border-radius: 35px;
-            width: 80%;
+            width: 100%;
         }
         .landing .land .textintro{
             width: 50%;
@@ -575,6 +577,9 @@ margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 800px) {
+    .landing .land{
+        height: 100%;
+    }
     .landing .land .intro{
         display: flex;
         margin-top: 111px;
@@ -589,8 +594,7 @@ margin-bottom: 10px;
             text-align: center;
         }
         .landing .land .imgintro img{
-            border-radius: 35px;
-            width: 80%;
+            width: 100%;
         }
         .landing .land .textintro{
             width: 50%;
@@ -683,6 +687,7 @@ margin-bottom: 10px;
         
 }
 @media only screen and (max-width: 700px) {
+
     .landing .land .navbarr .ulnav {
        padding: 0px;
     }

@@ -103,7 +103,7 @@ const Roomaudio = (props) => {
   const [toSign, settoSign] = useState(false);
   const [loading, setloading] = useState(false);
   const [userVideoAudio, setUserVideoAudio] = useState({
-    localUser: { audio: true },
+    localUser: { audio: false },
   });
   const [screenRecod, setScreenRecor] = useState(false);
   const peersRef = useRef([]);
@@ -157,7 +157,7 @@ const Roomaudio = (props) => {
           roomId,
           user,
           video: false,
-          audio: true,
+          audio: false,
           typeMeet: 'audio',
         });
 
